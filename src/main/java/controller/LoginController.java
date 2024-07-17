@@ -38,6 +38,7 @@ public class LoginController extends HttpServlet {
 //			세션 영역에 회원의 아이디와 이름을 저장 
 			req.getSession().setAttribute("UserId", dto.getId());
 			req.getSession().setAttribute("UserName", dto.getName());
+			req.getSession().setAttribute("UserPass", dto.getPass());
 			
             // 아이디 저장버튼이 눌렸다면 로그아웃을 해도 다음 로그인 시 아이디가 표시됨
             if(req.getParameter("save") != null) {

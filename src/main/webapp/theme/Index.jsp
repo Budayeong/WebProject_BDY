@@ -60,7 +60,7 @@
             </a>
              ${ UserId }
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="${pageContext.request.contextPath}/member/modify.do">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>

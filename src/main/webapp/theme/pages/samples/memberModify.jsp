@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>회원가입</title>
+  <title>회원정보 수정</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/feather/feather.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/ti-icons/css/themify-icons.css">
@@ -24,53 +24,48 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script type="text/javascript">
 //   폼 내용 검증
-  function validateForm(form) { 
-
-	    if (form.join_id.value == "") {
+  function validate(form) { 
+	    if (form.member_id.value == "") {
 	        alert("아이디를 입력하세요.");
-	        form.join_id.focus();
+	        form.member_id.focus();
 	        return false;
 	    }
-	    if (form.join_id.value.length < 6 || form.join_id.value.length > 12) {
+	    if (form.member_id.value.length < 6 || form.member_id.value.length > 12) {
 	        alert("아이디는 영문소문자 또는 숫자 6~12자로 입력해 주세요");
-	        form.join_id.focus();
+	        form.member_id.focus();
 	        return false;
 	    }
-	    if (form.checkId.value !== "check") {
+	    if ( (form.member_id.value !== '${ UserId }') && (form.checkId.value == "unCheck") ) {
 	        alert("아이디 중복체크를 진행하세요.");
-	        form.checkId.focus();
+	        form.member_id.focus();
 	        return false;
 	    }
-	    if (form.join_pass.value == "") {
-	        alert("비밀번호를 입력하세요.");
-	        form.join_pass.focus();
-	        return false;
-	    } 
 	    if (form.pass_check.value == "") {
 	        alert("비밀번호 체크를 진행하세요.");
 	        form.pass_check.focus();
 	        return false;
 	    } 
-	    if (form.join_pass.value != form.pass_check.value) {
+	    if (form.member_pass.value != form.pass_check.value) {
 	        alert("비밀번호가 일치하지 않습니다.");
-	        form.join_tel.focus();
+	        form.pass_check.focus();
 	        return false;
 	    } 
-	    if (form.join_name.value == "") {
+	    if (form.member_name.value == "") {
 	        alert("이름을 입력하세요.");
-	        form.join_name.focus();
+	        form.member_name.focus();
 	        return false;
 	    } 
-	    if (form.join_email.value == "") {
+	    if (form.member_eamil.value == "") {
 	        alert("이메일을 입력하세요.");
-	        form.join_email.focus();
+	        form.member_eamil.focus();
 	        return false;
 	    } 
-	    if (form.join_tel.value == "") {
+	    if (form.member_tel.value == "") {
 	        alert("전화번호를 입력하세요.");
-	        form.join_tel.focus();
+	        form.member_tel.focus();
 	        return false;
 	    } 
+	    
 	    return true;
 	}
 
@@ -126,36 +121,33 @@ function errFunc(errData) {
               <div class="brand-logo">
                 <img src="${pageContext.request.contextPath}/theme/images/logo.svg" alt="logo">
               </div>
-               ${ JoinErrMsg }
-              <h3>회원가입</h3>
-              <form class="pt-3" method="post" onsubmit="return validateForm(this);" action="${pageContext.request.contextPath}/member/Join.do">
+              <h3>회원정보 수정</h3>
+              <form class="pt-3" method="post" onsubmit="return validate(this);" action="${pageContext.request.contextPath}/member/modify.do">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="join_id" placeholder="아이디 (영문소문자/숫자, 6~12자)"></br>
+                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="member_id" placeholder="아이디 (영문소문자/숫자, 6~12자)" value="${ UserId }"></br>
                   <button type="button" name="idCheck" id="idCheck">중복 확인</button>
                   <span id="checkResult"></span><br> 
 <!--                   아이디 중복 확인 여부를 위한 hidden input태그 -->
                   <input type="hidden" name="checkId" value="unCheck" />
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="join_pass" placeholder="비밀번호">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="member_pass" placeholder="비밀번호" value="${ UserPass }">
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="pass_check" placeholder="비밀번호 확인">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="join_name" placeholder="이름">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="member_name" placeholder="이름" value="${ UserName }">
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" name="join_email" placeholder="이메일">
+                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" name="member_eamil" placeholder="이메일" value="${ UserEmail }">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="join_tel" placeholder="전화번호 (숫자만 입력, ex:01011112222)">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="member_tel" placeholder="전화번호 (숫자만 입력, ex:01011112222)" value="${ UserTel }">
                 </div>
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >회원가입</button>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  이미 계정이 있으신가요? <a href="${pageContext.request.contextPath}/member/Login.do" class="text-primary">Login</a>
+                  <button type="button" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="location.href='${pageContext.request.contextPath}/theme/Index.jsp' ">취소</button>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">수정</button>
                 </div>
               </form>
             </div>
