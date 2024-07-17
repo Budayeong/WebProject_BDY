@@ -69,5 +69,32 @@ public class MemberDAO extends DBConnPool {
 		return result;
 	}
 	
+//	회원가입: 아이디중복확인
+	public int checkId(String id) {
+		
+		int check = 0; 
+		try {
+			String query = "SELECT count(*) "
+					+ "FROM pmember "
+					+ "WHERE id = ?";
+			
+//			인파라미터가 있는 동적쿼리문 실행
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+                check = rs.getInt(1);
+            }
+			System.out.println(check);
+		}
+		catch (Exception e) {
+			System.out.println("아이디 체크 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return check;
+	}
+	
+	
 	
 }

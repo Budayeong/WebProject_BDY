@@ -12,6 +12,11 @@ import model.MemberDTO;
 
 @WebServlet("/member/Join.do")
 public class JoinController extends HttpServlet {
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/theme/pages/samples/Join.jsp").forward(req, resp);
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +49,7 @@ public class JoinController extends HttpServlet {
 		System.out.println(result);
 //		insert에 성공하면 로그인으로 이동, 실패하면 회원가입페이지로 이동
 		if(result==1)
-			resp.sendRedirect(req.getContextPath() + "/theme/pages/samples/Login.jsp");
+			resp.sendRedirect(req.getContextPath() + "/theme/pages/samples/JoinEnd.jsp");
 		else
 			common.JSFunction.alertLocation(resp, "회원가입에 실패했습니다", req.getContextPath()+"/theme/pages/samples/Join.jsp");
 		

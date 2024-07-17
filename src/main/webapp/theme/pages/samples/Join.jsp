@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>회원가입</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/feather/feather.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/ti-icons/css/themify-icons.css">
@@ -21,8 +21,10 @@
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/theme/images/favicon.png" />
   
   <!-- 회원가입 폼값 전송 시 폼값이 입력되었는지 검증하는 JS 함수 선언  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script type="text/javascript">
-  function validateForm(form) {  // 폼 내용 검증
+//   폼 내용 검증
+  function validateForm(form) { 
 
 	    if (form.join_id.value == "") {
 	        alert("아이디를 입력하세요.");
@@ -39,11 +41,6 @@
 	        form.checkId.focus();
 	        return false;
 	    }
-	    if (form.join_pass.value == "") {
-	        alert("비밀번호를 입력하세요.");
-	        form.join_pass.focus();
-	        return false;
-	    } 
 	    if (form.pass_check.value == "") {
 	        alert("비밀번호 체크를 진행하세요.");
 	        form.join_pass.focus();
@@ -73,10 +70,45 @@
 	}
 
   
-  function idCheck(form){
-	  
-  }
-  </script>
+// 아이디 중복 확인
+$(function() {
+    $.ajaxSetup({
+        url: "${pageContext.request.contextPath}/member/idCheck.do",
+        dataType: "text",
+    });
+
+    $("#idCheck").click(function() {
+        var join_id = $('input[name="join_id"]').val();
+        
+//         아이디가 입력되지않았으면 입력 안내
+        if (join_id === "") {
+            alert("아이디를 입력하세요.");
+            return;
+        }
+
+        $.ajax({
+            data: { user_id: join_id },
+            success: function(responseData) {
+                if (responseData === "0") {
+//                     alert("아이디 사용 가능");
+                    $("#checkResult").css("color","green").text("아이디 사용가능");
+                    $('input[name="checkId"]').val("check");
+                } else {
+                    $("#checkResult").css("color","red").text("아이디 사용불가");
+                    $('input[name="checkId"]').val("unCheck");
+                }
+            },
+            error: errFunc
+        });
+    });
+});
+
+// 아이디 중복 실패 
+function errFunc(errData) {
+    alert("실패: " + errData.status + "-" + errData.statusText);
+}
+
+</script> 
 </head>
 
 <body>
@@ -87,15 +119,17 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="${pageContext.request.contextPath}/theme/images/logo.svg" alt="logo">
               </div>
                ${ JoinErrMsg }
               <h3>회원가입</h3>
               <form class="pt-3" method="post" onsubmit="return validateForm(this);" action="${pageContext.request.contextPath}/member/Join.do">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="join_id" placeholder="아이디 (영문소문자/숫자, 6~12자)"></br>
-                  <button type="button" name="idCheck">중복 확인</button>
-                  <input type="hi-den" name="checkId" value="unCheck" />
+                  <button type="button" name="idCheck" id="idCheck">중복 확인</button>
+                  <span id="checkResult"></span><br> 
+<!--                   아이디 중복 확인 여부를 위한 hidden input태그 -->
+                  <input type="hidden" name="checkId" value="unCheck" />
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="join_pass" placeholder="비밀번호">
@@ -116,7 +150,7 @@
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >회원가입</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  이미 계정이 있으신가요? <a href="Login.do" class="text-primary">Login</a>
+                  이미 계정이 있으신가요? <a href="${pageContext.request.contextPath}/member/Login.do" class="text-primary">Login</a>
                 </div>
               </form>
             </div>
@@ -129,16 +163,16 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/hoverable-collapse.js"></script>
-  <script src="../../js/template.js"></script>
-  <script src="../../js/settings.js"></script>
-  <script src="../../js/todolist.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/off-canvas.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/hoverable-collapse.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/template.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/settings.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/todolist.js"></script>
   <!-- endinject -->
 </body>
 

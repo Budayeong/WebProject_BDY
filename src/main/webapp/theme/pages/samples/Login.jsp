@@ -46,7 +46,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="${pageContext.request.contextPath}/theme/images/logo.svg" alt="logo">
               </div>
               ${ LoginErrMsg }
               <h3>로그인</h3>
@@ -77,7 +77,7 @@
                   </button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  <a href="Join.jsp" class="text-primary">회원가입</a>
+                  <a href="${pageContext.request.contextPath}/member/Join.do" class="text-primary">회원가입</a>
                 </div>
               </form>
             </div>
@@ -90,16 +90,21 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/hoverable-collapse.js"></script>
-  <script src="../../js/template.js"></script>
-  <script src="../../js/settings.js"></script>
-  <script src="../../js/todolist.js"></script>
+<!--   <script src="../../js/off-canvas.js"></script> -->
+<!--   <script src="../../js/hoverable-collapse.js"></script> -->
+<!--   <script src="../../js/template.js"></script> -->
+<!--   <script src="../../js/settings.js"></script> -->
+<!--   <script src="../../js/todolist.js"></script> -->
+  <script src="${pageContext.request.contextPath}/theme/js/off-canvas.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/hoverable-collapse.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/template.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/settings.js"></script>
+  <script src="${pageContext.request.contextPath}/theme/js/todolist.js"></script>
   <!-- endinject -->
 </body>
 

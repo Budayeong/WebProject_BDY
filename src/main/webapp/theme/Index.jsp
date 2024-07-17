@@ -79,8 +79,10 @@
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
                 <span class="input-group-text">
-                <button type="button" class="btn btn-primary" onclick="location.href='pages/samples/Login.jsp' ">로그인</button>&nbsp&nbsp&nbsp
-                <button type="button" class="btn btn-primary" onclick="location.href='pages/samples/Join.jsp' ">회원가입</button>
+<!--                 <button type="button" class="btn btn-primary" onclick="location.href='pages/samples/Login.jsp' ">로그인</button>&nbsp&nbsp&nbsp -->
+                <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/Login.do' ">로그인</button>&nbsp&nbsp&nbsp
+<!--                 <button type="button" class="btn btn-primary" onclick="location.href='pages/samples/Join.jsp' ">회원가입</button> -->
+                <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/Join.do' ">회원가입</button>
                 </span>
               </div>
             </div>
@@ -297,12 +299,12 @@
               <ul class="nav flex-column sub-menu">
 <!--               회원정보 start -->
               <c:if test="${ not empty UserId }">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/Login.jsp"> 로그아웃 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/Logout.do"> 로그아웃 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> 회원정보 </a></li>
 			  </c:if>
 			  <c:if test="${ empty UserId }">
-				<li class="nav-item"> <a class="nav-link" href="pages/samples/Login.jsp"> 로그인 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> 회원가입 </a></li>
+				<li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/Login.do"> 로그인 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/Join.do"> 회원가입 </a></li>
 			  </c:if>
               </ul>
             </div>
