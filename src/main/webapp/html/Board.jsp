@@ -140,24 +140,47 @@
                 <div class="card-body">
                   <div class="table-responsive">
                   
-                 <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                          <div role="separator" class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                      </div>
-                      <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                      <div class="input-group-append">
-                        <button class="btn btn-sm btn-primary" type="button">Search</button>
-                      </div>
-                    </div>
-                  </div>
+                  <!-- 기존 ui -->
+<!--                  <div class="form-group"> -->
+<!--                     <div class="input-group"> -->
+<!--                       <div class="input-group-prepend"> -->
+<!--                         <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button> -->
+<!--                         <div class="dropdown-menu"> -->
+<!--                           <a class="dropdown-item" href="#">Action</a> -->
+<!--                           <a class="dropdown-item" href="#">Another action</a> -->
+<!--                           <a class="dropdown-item" href="#">Something else here</a> -->
+<!--                           <a class="dropdown-item" href="#">Separated link</a> -->
+<!--                         </div> -->
+<!--                       </div> -->
+<!--                       <input type="text" class="form-control" aria-label="Text input with dropdown button"> -->
+<!--                       <div class="input-group-append"> -->
+<!--                         <input type="submit" value="검색하기"  class="btn btn-sm btn-primary" /> -->
+<!--                       </div> -->
+<!--                     </div> -->
+<!--                   </div> -->
+
+				<!-- 검색 폼 -->
+				<!-- form으로 변경 - ui 수정 -->
+				<form method="get">
+				    <div class="form-group">
+				        <div class="input-group">
+				            <div class="input-group-prepend">
+				                <select class="btn btn-sm btn-outline-primary dropdown-toggle" name="searchField">
+				                    <option value="title">제목</option>
+				                    <option value="content">내용</option>
+				                    <option value="name">작성자</option>
+				                </select>
+				            </div>
+				            <input type="text" class="form-control" name="searchWord" aria-label="Text input with dropdown button">
+				            <div class="input-group-append">
+				                <input type="submit" value="검색하기" class="btn btn-sm btn-primary" />
+				            </div>
+				        </div>
+				    </div>
+				</form>
+
+
+				    
                   
                     <table class="table">
                       <thead>

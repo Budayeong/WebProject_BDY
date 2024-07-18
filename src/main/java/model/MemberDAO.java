@@ -12,7 +12,7 @@ public class MemberDAO extends DBConnPool {
 //		회원인증을 위한 쿼리문 실행 후 회원정보 저장을 위한 인스턴스 생성
 		MemberDTO dto = new MemberDTO();
 //		로그인 폼에서 입력한 아이디, 패스워드를 통해 인파라미터를 설정할 수 있도록 쿼리문 작성
-		String query = "select * from pmember where id=? and pass=?";
+		String query = "SELECT * FROM pmember WHERE id=? AND pass=?";
 		
 		try {
 //			쿼리문 실행을 위한 prepared 인스턴스 생성

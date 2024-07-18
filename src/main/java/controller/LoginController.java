@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.MemberDAO;
 import model.MemberDTO;
 
@@ -30,8 +31,13 @@ public class LoginController extends HttpServlet {
 		MemberDTO dto = dao.getMemberDTO(req.getParameter("user_id"), req.getParameter("user_pw"));
 		
 		System.out.println();
-		// 만약 DTO 객체에 아이디가 저장되어 있다면 로그인에 성공한 것
-		if(!(dto.getId().equals(""))){
+		
+		if(dto.getId() == null || dto.getId().equals("")) {
+//			로그인에 실패한 경우
+			common.JSFunction.alertLocation(resp, "아이디 또는 비밀번호가 일치하지않습니다.", req.getContextPath()+"/html/Login.jsp");
+		}
+		else {
+//			로그인에 성공한 경우: 세션영역에 회원정보 저장
 //			세션 영역에 회원의 아이디와 이름을 저장 
 			req.getSession().setAttribute("UserId", dto.getId());
 			req.getSession().setAttribute("UserName", dto.getName());
@@ -45,9 +51,6 @@ public class LoginController extends HttpServlet {
             }
 
 			resp.sendRedirect(req.getContextPath() + "/html/Index.jsp");
-		}
-		else {
-			common.JSFunction.alertLocation(resp, "아이디 또는 비밀번호가 일치하지않습니다.", req.getContextPath()+"/html/Login.jsp");
 		}
 		
 		

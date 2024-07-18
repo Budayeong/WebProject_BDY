@@ -61,7 +61,7 @@
 <!--                   </button> -->
 <!--                 </div> -->
                 <div class="text-center mt-4 font-weight-light">
-                  <a href="${pageContext.request.contextPath}/member/Join.do" class="text-primary">회원가입</a>
+                  계정이 없으신가요? <a href="${pageContext.request.contextPath}/member/Join.do" class="text-primary">회원가입</a>
                 </div>
               </form>
             </div>
