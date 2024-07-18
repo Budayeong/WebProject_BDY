@@ -17,7 +17,7 @@ public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/theme/pages/samples/Login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/html/Login.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -29,12 +29,9 @@ public class LoginController extends HttpServlet {
 //		form에서 사용자 입력값 받아옴
 		MemberDTO dto = dao.getMemberDTO(req.getParameter("user_id"), req.getParameter("user_pw"));
 		
-//		내장객체 사용을 위해 getServletContext() 메서드를 통해 객체를 얻어온 후 사용
-		ServletContext application = getServletContext();
-		
+		System.out.println();
 		// 만약 DTO 객체에 아이디가 저장되어 있다면 로그인에 성공한 것
-		System.out.println(dto.getId());
-		if(dto.getId() != null){
+		if(!(dto.getId().equals(""))){
 //			세션 영역에 회원의 아이디와 이름을 저장 
 			req.getSession().setAttribute("UserId", dto.getId());
 			req.getSession().setAttribute("UserName", dto.getName());
@@ -47,17 +44,13 @@ public class LoginController extends HttpServlet {
             	CookieManager.deleteCookie(resp, "savdId");
             }
 
-			resp.sendRedirect(req.getContextPath() + "/theme/Index.jsp");
+			resp.sendRedirect(req.getContextPath() + "/html/Index.jsp");
 		}
 		else {
-			/* 
-			로그인에 실패한 경우에는 request영역에 에러메세지를 저장한 후
-			로그인 페이지로 포워드함. request영역은 포워드 한 페이지까지
-			데이터를 공유함.
-			*/
-			req.setAttribute("LoginErrMsg", "로그인 오류입니다");
-			req.getRequestDispatcher("/theme/pages/samples/Login.jsp").forward(req, resp);
+			common.JSFunction.alertLocation(resp, "아이디 또는 비밀번호가 일치하지않습니다.", req.getContextPath()+"/html/Login.jsp");
 		}
+		
+		
 	}
 
 	

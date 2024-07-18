@@ -44,7 +44,7 @@ public class MemberDAO extends DBConnPool {
 		return dto;
 	}
 
-	//	회원가입: 멤버추가 메서드
+//	회원가입: 멤버추가 메서드
 	public int insertMember(MemberDTO dto) {
 		int result = 0 ;
 		try{
@@ -95,6 +95,31 @@ public class MemberDAO extends DBConnPool {
 		return check;
 	}
 	
+//	회원정보 수정
+	public int updateMember(MemberDTO dto, String id) {
+		int result = 0;
+		try{
+			
+			String query = "UPDATE pmember SET id = ?, pass = ?, name = ?, email = ?, tel =? WHERE id = ? ";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getPass());
+			psmt.setString(3, dto.getName());
+			psmt.setString(4, dto.getEmail());
+			psmt.setString(5, dto.getTel());
+			psmt.setString(6, id);
+			result = psmt.executeUpdate();
+			
+		}
+		catch (Exception e) {
+			System.out.println("회원정보 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
+	
+		
 }

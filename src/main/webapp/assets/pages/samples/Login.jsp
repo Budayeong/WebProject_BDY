@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>로그인</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/feather/feather.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/ti-icons/css/themify-icons.css">
@@ -48,10 +48,8 @@
               <div class="brand-logo">
                 <img src="${pageContext.request.contextPath}/theme/images/logo.svg" alt="logo">
               </div>
-              ${ LoginErrMsg }
               <h3>로그인</h3>
-<!--               <h6 class="font-weight-light">Sign in to continue.</h6> -->
-
+              ${ LoginErrMsg }
               <form class="pt-3" method="post" action="${pageContext.request.contextPath}/member/Login.do" onsubmit="return validateForm(this);">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="user_id" placeholder="아이디" value="${ cookie.savdId.value }">
@@ -71,11 +69,11 @@
                   </div>
                   <a href="#" class="auth-link text-black">비밀번호 찾기</a>
                 </div>
-                <div class="mb-2">
-                  <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                    <i class="ti-facebook mr-2"></i>페이스북계정 로그인
-                  </button>
-                </div>
+<!--                 <div class="mb-2"> -->
+<!--                   <button type="button" class="btn btn-block btn-facebook auth-form-btn"> -->
+<!--                     <i class="ti-facebook mr-2"></i>페이스북계정 로그인 -->
+<!--                   </button> -->
+<!--                 </div> -->
                 <div class="text-center mt-4 font-weight-light">
                   <a href="${pageContext.request.contextPath}/member/Join.do" class="text-primary">회원가입</a>
                 </div>

@@ -15,8 +15,9 @@ public class LogoutController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.getSession().invalidate();
+		
 		System.out.println("로그아웃 완료");
-		resp.sendRedirect(req.getContextPath() + "/theme/Index.jsp");
+		resp.sendRedirect(req.getContextPath() + "/html/Index.jsp");
 		
 		
 	}

@@ -2,25 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%@ include file="../inc/member_head.jsp" %>
   <title>회원가입</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/feather/feather.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/vertical-layout-light/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}/theme/images/favicon.png" />
-  
-  <!-- 회원가입 폼값 전송 시 폼값이 입력되었는지 검증하는 JS 함수 선언  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script type="text/javascript">
 //   폼 내용 검증
@@ -46,6 +30,11 @@
 	        form.join_pass.focus();
 	        return false;
 	    } 
+	    if (form.join_pass.value.length < 6 || form.join_pass.value.length > 18) {
+	        alert("비밀번호는 영문소문자 또는 숫자 6~18자로 입력해 주세요");
+	        form.join_pass.focus();
+	        return false;
+	    }
 	    if (form.pass_check.value == "") {
 	        alert("비밀번호 체크를 진행하세요.");
 	        form.pass_check.focus();
@@ -73,12 +62,11 @@
 	    } 
 	    return true;
 	}
-
   
 // 아이디 중복 확인
 $(function() {
     $.ajaxSetup({
-        url: "${pageContext.request.contextPath}/member/idCheck.do",
+        url: "../member/idCheck.do",
         dataType: "text",
     });
 
@@ -96,10 +84,10 @@ $(function() {
             success: function(responseData) {
                 if (responseData === "0") {
 //                     alert("아이디 사용 가능");
-                    $("#checkResult").css("color","green").text("아이디 사용가능");
+                    $("#checkResult").css("color","green").text("사용가능한 아이디");
                     $('input[name="checkId"]').val("check");
                 } else {
-                    $("#checkResult").css("color","red").text("아이디 사용불가");
+                    $("#checkResult").css("color","red").text("사용할 수 없는 아이디");
                     $('input[name="checkId"]').val("unCheck");
                 }
             },
@@ -115,7 +103,6 @@ function errFunc(errData) {
 
 </script> 
 </head>
-
 <body>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -124,11 +111,11 @@ function errFunc(errData) {
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="${pageContext.request.contextPath}/theme/images/logo.svg" alt="logo">
+                <img src="${pageContext.request.contextPath}/assets/images/logo.svg" alt="logo">
               </div>
                ${ JoinErrMsg }
               <h3>회원가입</h3>
-              <form class="pt-3" method="post" onsubmit="return validateForm(this);" action="${pageContext.request.contextPath}/member/Join.do">
+              <form name="joinForm" class="pt-3" method="post" onsubmit="return validateForm(this);" action="${pageContext.request.contextPath}/member/Join.do">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="join_id" placeholder="아이디 (영문소문자/숫자, 6~12자)"></br>
                   <button type="button" name="idCheck" id="idCheck">중복 확인</button>
@@ -137,7 +124,7 @@ function errFunc(errData) {
                   <input type="hidden" name="checkId" value="unCheck" />
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="join_pass" placeholder="비밀번호">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="join_pass" placeholder="비밀번호 (영문소문자/숫자, 6~18자)">
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="pass_check" placeholder="비밀번호 확인">
@@ -166,19 +153,7 @@ function errFunc(errData) {
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="${pageContext.request.contextPath}/theme/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="${pageContext.request.contextPath}/theme/js/off-canvas.js"></script>
-  <script src="${pageContext.request.contextPath}/theme/js/hoverable-collapse.js"></script>
-  <script src="${pageContext.request.contextPath}/theme/js/template.js"></script>
-  <script src="${pageContext.request.contextPath}/theme/js/settings.js"></script>
-  <script src="${pageContext.request.contextPath}/theme/js/todolist.js"></script>
-  <!-- endinject -->
+  <%@ include file="../inc/member_js.jsp" %>>
 </body>
 
 </html>
