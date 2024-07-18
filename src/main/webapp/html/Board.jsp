@@ -53,24 +53,6 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
-      <div class="assets-setting-wrapper">
-        <div id="settings-trigger"><i class="ti-settings"></i></div>
-        <div id="assets-settings" class="settings-panel">
-          <i class="settings-close ti-close"></i>
-          <p class="settings-heading">SIDEBAR SKINS</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-assets"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-assets"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
-          <p class="settings-heading mt-2">HEADER SKINS</p>
-          <div class="color-tiles mx-0 px-4">
-            <div class="tiles success"></div>
-            <div class="tiles warning"></div>
-            <div class="tiles danger"></div>
-            <div class="tiles info"></div>
-            <div class="tiles dark"></div>
-            <div class="tiles default"></div>
-          </div>
-        </div>
-      </div>
       <!-- partial -->
       <!-- 왼쪽 사이드 바 -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -139,26 +121,15 @@
               <div class="card">
                 <div class="card-body">
                   <div class="table-responsive">
-                  
-                  <!-- 기존 ui -->
-<!--                  <div class="form-group"> -->
-<!--                     <div class="input-group"> -->
-<!--                       <div class="input-group-prepend"> -->
-<!--                         <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button> -->
-<!--                         <div class="dropdown-menu"> -->
-<!--                           <a class="dropdown-item" href="#">Action</a> -->
-<!--                           <a class="dropdown-item" href="#">Another action</a> -->
-<!--                           <a class="dropdown-item" href="#">Something else here</a> -->
-<!--                           <a class="dropdown-item" href="#">Separated link</a> -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                       <input type="text" class="form-control" aria-label="Text input with dropdown button"> -->
-<!--                       <div class="input-group-append"> -->
-<!--                         <input type="submit" value="검색하기"  class="btn btn-sm btn-primary" /> -->
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                   </div> -->
-
+					<!-- 글쓰기 버튼 -->
+					<div class="form-group">
+			            <div class="justify-content-end d-flex">
+			                <button type="button" class="btn btn-outline-primary btn-icon-text">
+	                          <i class="ti-file btn-icon-prepend"></i>
+	                          글쓰기
+	                        </button>
+			            </div>
+				    </div>
 				<!-- 검색 폼 -->
 				<!-- form으로 변경 - ui 수정 -->
 				<form method="get">
@@ -178,10 +149,6 @@
 				        </div>
 				    </div>
 				</form>
-
-
-				    
-                  
                     <table class="table">
                       <thead>
                         <tr>
@@ -193,41 +160,82 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>5</td>
-                          <td>제목5</td>
-                          <td>작성자5</td>
-                          <td><label class="badge badge-danger">Pending</label></td>
-                          <th>조회수</th>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>제목4</td>
-                          <td>작성자4</td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                          <th>조회수</th>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>제목3</td>
-                          <td>작성자3</td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                          <th>조회수</th>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>제목2</td>
-                          <td>작성자2</td>
-                          <td><label class="badge badge-success">Completed</label></td>
-                          <th>조회수</th>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>제목1</td>
-                          <td>작성자1</td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                          <th>조회수</th>
-                        </tr>
+<!--                         <tr> -->
+<!--                           <td>5</td> -->
+<!--                           <td>제목5</td> -->
+<!--                           <td>작성자5</td> -->
+<!--                           <td><label class="badge badge-danger">Pending</label></td> -->
+<!--                           <th>조회수</th> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                           <td>4</td> -->
+<!--                           <td>제목4</td> -->
+<!--                           <td>작성자4</td> -->
+<!--                           <td><label class="badge badge-warning">In progress</label></td> -->
+<!--                           <th>조회수</th> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                           <td>3</td> -->
+<!--                           <td>제목3</td> -->
+<!--                           <td>작성자3</td> -->
+<!--                           <td><label class="badge badge-info">Fixed</label></td> -->
+<!--                           <th>조회수</th> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                           <td>2</td> -->
+<!--                           <td>제목2</td> -->
+<!--                           <td>작성자2</td> -->
+<!--                           <td><label class="badge badge-success">Completed</label></td> -->
+<!--                           <th>조회수</th> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                           <td>1</td> -->
+<!--                           <td>제목1</td> -->
+<!--                           <td>작성자1</td> -->
+<!--                           <td><label class="badge badge-warning">In progress</label></td> -->
+<!--                           <th>조회수</th> -->
+<!--                         </tr> -->
+
+
+ <!-- 검색어 조건에 따라 게시물이 있는지 확인하기 위해 choose태그 사용 -->
+	<c:choose>
+		<c:when test="${ empty boardLists }">
+			<!-- List에 저장된 레코드가 없는 경우  -->
+	        <tr>
+	            <td colspan="5" align="center">
+	                등록된 게시물이 없습니다^^*
+	            </td>
+	        </tr>
+		</c:when>
+		<c:otherwise>
+			<!-- 저장된 게시물이 있다면 개수만큼 반복해서 출력
+			items 속성에는 반복가능한 객체를 기술, 순서대로 추출된 데이터는
+			var 속성에 지정한 변수로 저장됨 -->           
+			<c:forEach items="${ boardLists }" var="row" varStatus="loop">
+		        <tr align="center">
+		        	<!-- 가상번호 -->
+		            <td>
+		            	${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index) }
+		            </td>
+		            <td align="left">
+		            	<a href="../mvcboard/view.do?idx=${ row.idx }">${ row.title }</a>
+		            </td> 
+		            <td>${ row.name }</td>
+		            <td>${ row.visitcount }</td>
+		            <td>${ row.postdate }</td>
+		            <td>
+		            <!-- 다운로드 링크는 첨부파일이 있을때만 표시 -->
+		            <c:if test="${ not empty row.ofile }">
+		            	<a href="../mvcboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>	
+		            </c:if>
+		            </td>
+		        </tr>
+			</c:forEach>		
+		</c:otherwise>
+	</c:choose>
+
+
+
                       </tbody>
                     </table>
                   </div>
