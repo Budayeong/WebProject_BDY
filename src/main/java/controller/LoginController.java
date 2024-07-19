@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import model.MemberDAO;
 import model.MemberDTO;
 
-@WebServlet("/member/Login.do")
+@WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
 
 	@Override
@@ -29,8 +29,8 @@ public class LoginController extends HttpServlet {
 		
 //		form에서 사용자 입력값 받아옴
 		MemberDTO dto = dao.getMemberDTO(req.getParameter("user_id"), req.getParameter("user_pw"));
+		dao.close();
 		
-		System.out.println();
 		
 		if(dto.getId() == null || dto.getId().equals("")) {
 //			로그인에 실패한 경우

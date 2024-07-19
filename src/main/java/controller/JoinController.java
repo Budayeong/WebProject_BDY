@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.MemberDAO;
 import model.MemberDTO;
 
-@WebServlet("/member/Join.do")
+@WebServlet("/member/join.do")
 public class JoinController extends HttpServlet {
 	
 	@Override

@@ -22,6 +22,7 @@ public class memberModifyController extends HttpServlet {
 		String userPass = (String) req.getSession().getAttribute("UserPass");
 		
 		MemberDTO dto = dao.getMemberDTO(userId, userPass);
+		dao.close();
 		
 		req.getSession().setAttribute("UserName", dto.getName());
 		req.getSession().setAttribute("UserEmail", dto.getEmail());
@@ -51,6 +52,7 @@ public class memberModifyController extends HttpServlet {
 		dto.setTel(req.getParameter("member_tel"));
 		
 		int result = dao.updateMember(dto, userId);
+		dao.close();
 		
 		if(result == 1) {
 			System.out.println("업데이트 성공");

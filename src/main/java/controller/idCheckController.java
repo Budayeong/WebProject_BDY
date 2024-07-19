@@ -20,6 +20,7 @@ public class idCheckController extends HttpServlet{
 		
 //		form에서 사용자 입력값 받아옴
 		int checkOk = dao.checkId(req.getParameter("user_id"));
+		dao.close();
 		
 //		checkOk값을 문자열로 변경해 응답
 		resp.getWriter().write(String.valueOf(checkOk));

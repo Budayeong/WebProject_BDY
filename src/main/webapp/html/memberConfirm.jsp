@@ -30,7 +30,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="${pageContext.request.contextPath}/assets/images/logo.svg" alt="logo">
               </div>
               <h3>회원정보 확인</h3>
                 <form class="pt-3" method="post" action="${pageContext.request.contextPath}/member/Login.do" onsubmit="return validateForm(this);">

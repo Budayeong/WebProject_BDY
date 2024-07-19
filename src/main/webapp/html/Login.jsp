@@ -36,7 +36,7 @@
               </div>
               <h3>로그인</h3>
               ${ LoginErrMsg }
-              <form name="loginForm" class="pt-3" method="post" action="${pageContext.request.contextPath}/member/Login.do" onsubmit="return validateForm(this);">
+              <form name="loginForm" class="pt-3" method="post" action="${pageContext.request.contextPath}/member/login.do" onsubmit="return validateForm(this);">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="user_id" placeholder="아이디" value="${ cookie.savdId.value }">
                 </div>
@@ -61,7 +61,7 @@
 <!--                   </button> -->
 <!--                 </div> -->
                 <div class="text-center mt-4 font-weight-light">
-                  계정이 없으신가요? <a href="${pageContext.request.contextPath}/member/Join.do" class="text-primary">회원가입</a>
+                  계정이 없으신가요? <a href="${pageContext.request.contextPath}/member/join.do" class="text-primary">회원가입</a>
                 </div>
               </form>
             </div>

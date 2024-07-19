@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자유게시판</title>
+  <title>자유게시판 글작성</title>
 </head>
 <body>
   <div class="container-scroller">
@@ -49,7 +49,6 @@
       </div>
     </nav>
     <!-- 네비 바 end -->
-    
     <!-- 페이지 내용 start  -->
     <div class="container-fluid page-body-wrapper">
       <!-- 왼쪽 사이드 바 -->
@@ -115,98 +114,62 @@
           </div>
           <!-- 테이블  -->
         <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="table-responsive">
-					<!-- 글쓰기 버튼 -->
-					<div class="form-group">
-			            <div class="justify-content-end d-flex">
-			                <button type="button" class="btn btn-outline-primary btn-icon-text" onclick="location.href='../board/boardWrite.do'">
-	                          <i class="ti-file btn-icon-prepend"></i>
-	                          글쓰기
-	                        </button>
-			            </div>
-				    </div>
-					<!-- 검색 폼 start -->
-					<!-- form으로 변경 - ui 수정 -->
-					<form method="get">
-					    <div class="form-group">
-					        <div class="input-group">
-					            <div class="input-group-prepend">
-					                <select class="btn btn-sm btn-outline-primary dropdown-toggle" name="searchField">
-					                    <option value="title">제목</option>
-					                    <option value="content">내용</option>
-					                    <option value="name">작성자</option>
-					                </select>
-					            </div>
-					            <input type="text" class="form-control" name="searchWord" aria-label="Text input with dropdown button">
-					            <div class="input-group-append">
-					                <input type="submit" value="검색하기" class="btn btn-sm btn-primary" />
-					            </div>
-					        </div>
-					    </div>
-					</form>
-					<!-- 검색 폼 end -->
-					<!-- 게시판 리스트 start -->
-	                <table class="table">
-	                  <thead>
-	                    <tr>
-	                      <th>No</th>
-	                      <th>제목</th>
-	                      <th>작성자</th>
-	                      <th>작성일</th>
-	                      <th>조회수</th>
-	                    </tr>
-	                  </thead>
-	                  <tbody>
-						 <!-- 검색어 조건에 따라 게시물이 있는지 확인하기 위해 choose태그 사용 -->
-						<c:choose>
-							<c:when test="${ empty boardLists }">
-								<!-- List에 저장된 레코드가 없는 경우  -->
-						        <tr>
-						            <td colspan="5" align="center">
-						                등록된 게시물이 없습니다^^*
-						            </td>
-						        </tr>
-							</c:when>
-							<c:otherwise>
-								<!-- 저장된 게시물이 있다면 개수만큼 반복해서 출력
-								items 속성에는 반복가능한 객체를 기술, 순서대로 추출된 데이터는
-								var 속성에 지정한 변수로 저장됨 -->      
-								<c:set var="countNum" value="0" />     
-								<c:forEach items="${ boardLists }" var="row" varStatus="loop">
-							        <tr>
-							        	<!-- 가상번호 -->
-							            <td>
-								            	${ boardParam.totalCount - (((boardParam.pageNum - 1) * boardParam.pageSize) + countNum) }
-							            </td>
-							            <td>
-							            	<a href="../board/boardView.do?num=${ row.num }">${ row.title }</a>
-							            </td> 
-							            <td>${ row.name }</td>
-							            <td>${ row.postdate }</td>
-							            <td>${ row.visitcount }</td>
-							        </tr>
-							     <c:set var="countNum" value="${countNum + 1}" />
-								</c:forEach>		
-							</c:otherwise>
-						</c:choose>
-	                  </tbody>
-	                </table>
-	                <!-- 게시판 리스트 end -->
-					<!-- 페이징 처리  -->
-					<table width="100%">
-					  <tr align="center">
-					  	<td>
-					  		<br/>
-					  		${ boardParam.boardPaging }
-					  	</td>
-					  </tr>
-					</table>
-                  </div>
-                </div>
-              </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+              <table class="table" width="90%">
+			   <colgroup>
+			     <col width="15%"/> <col width="35%"/>
+			     <col width="15%"/> <col width="*"/>
+			   </colgroup> 
+			   <tr>
+			     <td>번호</td> <td>${ dto.num } </td>
+			     <td>작성자</td> <td>${ dto.name }</td>
+			   </tr>
+			   <tr>
+			     <td>작성일</td> <td>${ dto.postdate }</td>
+			     <td>조회수</td> <td>${ dto.visitcount }</td>
+			   </tr>
+			   <tr>
+			     <td>제목</td>
+			     <td colspan="3">${ dto.title }</td>
+			   </tr>
+			   <tr>
+			     <td colspan="4" height="100">
+		         ${ dto.content }
+		    	 </td>
+			   </tr>
+			   <c:choose>
+				 <c:when test="${ (not empty UserId) && (UserId eq dto.id) }">
+				   <tr>
+			         <td colspan="4" align="center">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../mvcboard/pass.do?mode=edit&idx=${ param.idx }';">
+		                    수정하기
+		                </button>
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../mvcboard/pass.do?mode=delete&idx=${ param.idx }';">
+		                    삭제하기
+		                </button>
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/board.do';">
+		                    목록 바로가기
+		                </button>
+			         </td>
+				    </tr>
+				 </c:when>
+			     <c:otherwise>
+			        <tr>
+		              <td colspan="4" align="center">
+		                 <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/board.do';">
+		                     목록 바로가기
+		                 </button>
+		              </td>
+			        </tr>
+			     </c:otherwise>
+			   </c:choose>
+			 </table>
             </div>
+          </div>
+         </div>
+       </div>
         <!-- 테이블 end -->
         <!-- 푸터 start  -->
         <%@ include file="../inc/footer.jsp" %> 

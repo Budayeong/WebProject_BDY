@@ -92,4 +92,65 @@ public class BoardDAO extends DBConnPool {
 		return boardList;
 	}
 	
+//	상세보기: 게시물 한개 반환
+//	상세보기를 위해 일련번호에 해당하는 레코드 1개를 인출해서 반환
+	public BoardDTO selectView(String num) {
+		
+		BoardDTO dto = new BoardDTO();
+		
+//		인파라미터가 있는 select 쿼리문
+		String query = "SELECT * FROM pboard WHERE num=?";
+		try {
+//			인파라미터 설정 및 쿼리실행
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			rs = psmt.executeQuery();
+			
+//			결과를 DTO에 저장
+			if(rs.next()) {
+				dto.setNum(rs.getString(1));
+				dto.setTitle(rs.getString(2));
+				dto.setContent(rs.getString(3));
+				dto.setId(rs.getString(4));;
+				dto.setName(rs.getString(5));
+				dto.setPostdate(rs.getDate(6));
+				dto.setVisitcount(rs.getString(7));
+			}
+		}
+		catch (Exception e) {
+			System.out.println("게시물 상세보기 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+//	글쓰기
+	public int insertWrite(BoardDTO dto) {
+		int result = 0 ;
+		try{
+			/*
+			쿼리문에서 사용한 시퀀스는 모델1 게시판에서 생성한 내용 그대로 사용.
+			나머지 값들은 컨트롤러에서 받은 후 모델(DAO)로 전달함.
+			*/
+			String query = "INSERT INTO pboard ( "
+						+ " num, title, content, id, name) "
+						+ " VALUES ( "
+						+ " seq_pboard_num.NEXTVAL, ?, ?, ?, ? )";
+			
+//			인파라미터가 없는 정적쿼리문을 실행하므로 Statement인스턴스 생성
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getId());
+			psmt.setString(4, dto.getName());
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 입력 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

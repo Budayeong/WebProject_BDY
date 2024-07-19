@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.BoardDAO;
 import model.BoardDTO;
 
-@WebServlet("/board/Board.do")
+@WebServlet("/board/board.do")
 public class BoardController extends HttpServlet{
 
 	@Override
@@ -63,9 +63,10 @@ public class BoardController extends HttpServlet{
 		
 //		DB로부터 게시물 목록을 받아옴
 		List<BoardDTO> boardLists = dao.selectListPage(boardParam);
+		dao.close();
 		
 		/* 반환 */
-		String boardPaging = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../board/Board.do");
+		String boardPaging = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../board/board.do");
 		boardParam.put("boardPaging", boardPaging);
 		boardParam.put("totalCount", totalCount);
 		boardParam.put("pageSize", pageSize);
@@ -74,6 +75,7 @@ public class BoardController extends HttpServlet{
 		
 		req.setAttribute("boardLists",boardLists);
 		req.setAttribute("boardParam", boardParam);
+		
 		
 //		list 페이지로 이동
 		req.getRequestDispatcher("/html/Board.jsp").forward(req, resp);

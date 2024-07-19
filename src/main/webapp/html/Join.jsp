@@ -142,7 +142,7 @@ function errFunc(errData) {
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >회원가입</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  이미 계정이 있으신가요? <a href="${pageContext.request.contextPath}/member/Login.do" class="text-primary">Login</a>
+                  이미 계정이 있으신가요? <a href="${pageContext.request.contextPath}/member/login.do" class="text-primary">Login</a>
                 </div>
               </form>
             </div>

@@ -10,7 +10,7 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
-    <!-- 데이터베이스 연결을 위한 접속 정보를 컨텍스트 초기화 파라미터로 설정 -->
+  <!-- 데이터베이스 연결을 위한 접속 정보를 컨텍스트 초기화 파라미터로 설정 -->
   <context-param>
   	<param-name>OracleDriver</param-name>
   	<param-value>oracle.jdbc.OracleDriver</param-value>

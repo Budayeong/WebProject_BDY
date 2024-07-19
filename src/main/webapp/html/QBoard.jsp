@@ -27,7 +27,7 @@
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item" href="${pageContext.request.contextPath}/member/Logout.do">
+              <a class="dropdown-item" href="${pageContext.request.contextPath}/member/logout.do">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -43,9 +43,9 @@
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
                 <span class="input-group-text">
 <!--                 <button type="button" class="btn btn-primary" onclick="location.href='pages/samples/Login.jsp' ">로그인</button>&nbsp&nbsp&nbsp -->
-                <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/Login.do' ">로그인</button>&nbsp&nbsp&nbsp
+                <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/login.do' ">로그인</button>&nbsp&nbsp&nbsp
 <!--                 <button type="button" class="btn btn-primary" onclick="location.href='pages/samples/Join.jsp' ">회원가입</button> -->
-                <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/Join.do' ">회원가입</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/join.do' ">회원가입</button>
                 </span>
               </div>
             </div>
@@ -79,7 +79,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../board/Board.do">자유게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/QBoard.do">Q&A게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">자료실</a></li>
               </ul>
@@ -95,12 +95,12 @@
               <ul class="nav flex-column sub-menu">
 <!--               회원정보 start -->
               <c:if test="${ not empty UserId }">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/Logout.do"> 로그아웃 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/logout.do"> 로그아웃 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/modify.do"> 회원정보 </a></li>
 			  </c:if>
 			  <c:if test="${ empty UserId }">
-				<li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/Login.do"> 로그인 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/Join.do"> 회원가입 </a></li>
+				<li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/login.do"> 로그인 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/member/join.do"> 회원가입 </a></li>
 			  </c:if>
               </ul>
             </div>
