@@ -7,6 +7,7 @@ public class MemberDAO extends DBConnPool {
 	public MemberDAO() {};
 
 
+//	입력받은 id, pass와 동일한 데이터를 DB에서 찾아 반환
 	public MemberDTO getMemberDTO(String uid, String upass)	{
 		System.out.println(uid +" / "+ upass);
 //		회원인증을 위한 쿼리문 실행 후 회원정보 저장을 위한 인스턴스 생성
@@ -118,7 +119,6 @@ public class MemberDAO extends DBConnPool {
 		}
 		return result;
 	}
-	
 	
 	
 		

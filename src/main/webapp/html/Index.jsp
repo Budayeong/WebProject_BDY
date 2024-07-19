@@ -12,43 +12,43 @@
     <!-- partial:partials/_navbar.html -->
     <%@ include file="../inc/navbar.jsp" %> 
 	<!-- 유저메뉴 start -->
-<c:if test="${ not empty UserId }">
+	<c:if test="${ not empty UserId }">
+			
 		
+	          <li class="nav-item nav-profile dropdown">
+	            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+	              <img src="${pageContext.request.contextPath}/assets/images/faces/face28.jpg" alt="profile"/> &nbsp&nbsp
+	            </a>
+	             <strong>${ UserName }</strong>님
+	            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+	              <a class="dropdown-item" href="../member/modify.do">
+	                <i class="ti-settings text-primary"></i>
+	                Settings
+	              </a>
+	              <a class="dropdown-item" href="../member/Logout.do">
+	                <i class="ti-power-off text-primary"></i>
+	                Logout
+	              </a>
+	            </div>
+	          </li>
+	          
+	</c:if>
+	<c:if test="${ empty UserId }">
 	
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="${pageContext.request.contextPath}/assets/images/faces/face28.jpg" alt="profile"/> &nbsp&nbsp
-            </a>
-             <strong>${ UserName }</strong>님
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="../member/modify.do">
-                <i class="ti-settings text-primary"></i>
-                Settings
-              </a>
-              <a class="dropdown-item" href="../member/Logout.do">
-                <i class="ti-power-off text-primary"></i>
-                Logout
-              </a>
-            </div>
-          </li>
-          
-</c:if>
-<c:if test="${ empty UserId }">
-
-        <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text">
-                <button type="button" class="btn btn-primary" onclick="location.href='../member/Login.do' ">로그인</button>&nbsp&nbsp&nbsp
-                <button type="button" class="btn btn-primary" onclick="location.href='../member/Join.do' ">회원가입</button>
-                </span>
-              </div>
-            </div>
-          </li>
-        </ul>
-</c:if>
-<!--           유저메뉴 end -->
+	        <ul class="navbar-nav mr-lg-2">
+	          <li class="nav-item nav-search d-none d-lg-block">
+	            <div class="input-group">
+	              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+	                <span class="input-group-text">
+	                <button type="button" class="btn btn-primary" onclick="location.href='../member/Login.do' ">로그인</button>&nbsp&nbsp&nbsp
+	                <button type="button" class="btn btn-primary" onclick="location.href='../member/Join.do' ">회원가입</button>
+	                </span>
+	              </div>
+	            </div>
+	          </li>
+	        </ul>
+	</c:if>
+	<!--           유저메뉴 end -->
         </ul>
       </div>
     </nav>

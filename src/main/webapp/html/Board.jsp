@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
     <!-- 네비 바 start -->
     <%@ include file="../inc/navbar.jsp" %> 
 	<!-- 유저메뉴 start -->
@@ -50,10 +49,9 @@
       </div>
     </nav>
     <!-- 네비 바 end -->
-    <!-- partial -->
+    
+    <!-- 페이지 내용 start  -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
-      <!-- partial -->
       <!-- 왼쪽 사이드 바 -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
@@ -102,7 +100,6 @@
         </ul>
       </nav>
       <!-- 왼쪽 사이드 바 end -->
-      <!-- partial -->
       <!-- 게시판 start -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -130,74 +127,39 @@
 	                        </button>
 			            </div>
 				    </div>
-				<!-- 검색 폼 -->
-				<!-- form으로 변경 - ui 수정 -->
-				<form method="get">
-				    <div class="form-group">
-				        <div class="input-group">
-				            <div class="input-group-prepend">
-				                <select class="btn btn-sm btn-outline-primary dropdown-toggle" name="searchField">
-				                    <option value="title">제목</option>
-				                    <option value="content">내용</option>
-				                    <option value="name">작성자</option>
-				                </select>
-				            </div>
-				            <input type="text" class="form-control" name="searchWord" aria-label="Text input with dropdown button">
-				            <div class="input-group-append">
-				                <input type="submit" value="검색하기" class="btn btn-sm btn-primary" />
-				            </div>
-				        </div>
-				    </div>
-				</form>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>제목</th>
-                          <th>작성자</th>
-                          <th>작성일</th>
-                          <th>조회수</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-<!--                         <tr> -->
-<!--                           <td>5</td> -->
-<!--                           <td>제목5</td> -->
-<!--                           <td>작성자5</td> -->
-<!--                           <td><label class="badge badge-danger">Pending</label></td> -->
-<!--                           <th>조회수</th> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                           <td>4</td> -->
-<!--                           <td>제목4</td> -->
-<!--                           <td>작성자4</td> -->
-<!--                           <td><label class="badge badge-warning">In progress</label></td> -->
-<!--                           <th>조회수</th> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                           <td>3</td> -->
-<!--                           <td>제목3</td> -->
-<!--                           <td>작성자3</td> -->
-<!--                           <td><label class="badge badge-info">Fixed</label></td> -->
-<!--                           <th>조회수</th> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                           <td>2</td> -->
-<!--                           <td>제목2</td> -->
-<!--                           <td>작성자2</td> -->
-<!--                           <td><label class="badge badge-success">Completed</label></td> -->
-<!--                           <th>조회수</th> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                           <td>1</td> -->
-<!--                           <td>제목1</td> -->
-<!--                           <td>작성자1</td> -->
-<!--                           <td><label class="badge badge-warning">In progress</label></td> -->
-<!--                           <th>조회수</th> -->
-<!--                         </tr> -->
-
-
- <!-- 검색어 조건에 따라 게시물이 있는지 확인하기 위해 choose태그 사용 -->
+					<!-- 검색 폼 start -->
+					<!-- form으로 변경 - ui 수정 -->
+					<form method="get" action="../board/Board.do">
+					    <div class="form-group">
+					        <div class="input-group">
+					            <div class="input-group-prepend">
+					                <select class="btn btn-sm btn-outline-primary dropdown-toggle" name="searchField">
+					                    <option value="title">제목</option>
+					                    <option value="content">내용</option>
+					                    <option value="name">작성자</option>
+					                </select>
+					            </div>
+					            <input type="text" class="form-control" name="searchWord" aria-label="Text input with dropdown button">
+					            <div class="input-group-append">
+					                <input type="submit" value="검색하기" class="btn btn-sm btn-primary" />
+					            </div>
+					        </div>
+					    </div>
+					</form>
+					<!-- 검색 폼 end -->
+					<!-- 게시판 리스트 start -->
+	                <table class="table">
+	                  <thead>
+	                    <tr>
+	                      <th>No</th>
+	                      <th>제목</th>
+	                      <th>작성자</th>
+	                      <th>작성일</th>
+	                      <th>조회수</th>
+	                    </tr>
+	                  </thead>
+	                  <tbody>
+	 <!-- 검색어 조건에 따라 게시물이 있는지 확인하기 위해 choose태그 사용 -->
 	<c:choose>
 		<c:when test="${ empty boardLists }">
 			<!-- List에 저장된 레코드가 없는 경우  -->
@@ -210,34 +172,41 @@
 		<c:otherwise>
 			<!-- 저장된 게시물이 있다면 개수만큼 반복해서 출력
 			items 속성에는 반복가능한 객체를 기술, 순서대로 추출된 데이터는
-			var 속성에 지정한 변수로 저장됨 -->           
+			var 속성에 지정한 변수로 저장됨 -->      
+			<c:set var="countNum" value="0" />     
 			<c:forEach items="${ boardLists }" var="row" varStatus="loop">
-		        <tr align="center">
+		        <tr>
 		        	<!-- 가상번호 -->
 		            <td>
-		            	${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index) }
+			            	${ boardParam.totalCount - (((boardParam.pageNum - 1) * boardParam.pageSize) + countNum) }
 		            </td>
-		            <td align="left">
-		            	<a href="../mvcboard/view.do?idx=${ row.idx }">${ row.title }</a>
+		            <td>
+		            	<a href="#">${ row.title }</a>
 		            </td> 
 		            <td>${ row.name }</td>
-		            <td>${ row.visitcount }</td>
 		            <td>${ row.postdate }</td>
-		            <td>
-		            <!-- 다운로드 링크는 첨부파일이 있을때만 표시 -->
-		            <c:if test="${ not empty row.ofile }">
-		            	<a href="../mvcboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>	
-		            </c:if>
-		            </td>
+		            <td>${ row.visitcount }</td>
 		        </tr>
+		     <c:set var="countNum" value="${countNum + 1}" />
 			</c:forEach>		
 		</c:otherwise>
 	</c:choose>
-
-
-
-                      </tbody>
-                    </table>
+	
+	
+	                  </tbody>
+	                </table>
+	                <!-- 게시판 리스트 end -->
+	                
+<!-- 페이징 처리  -->
+<table width="100%">
+  <tr align="center">
+  	<td>
+  		<br/>
+  		${ boardParam.boardPaging }
+  	</td>
+  </tr>
+</table>
+    
                   </div>
                 </div>
               </div>
@@ -246,16 +215,14 @@
         <!-- 푸터 start  -->
         <%@ include file="../inc/footer.jsp" %> 
         <!-- 푸터 end -->
-      </div>
+        </div>
+      </div>   
       <!-- 게시판 end -->
-    </div>   
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+  	</div>
+  	<!-- 페이지 내용 end  -->
 
   <!-- plugins:js -->
   <%@ include file="../inc/js.jsp" %>
 </body>
-
 </html>
 
