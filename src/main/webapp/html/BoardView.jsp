@@ -143,7 +143,8 @@
 				 <c:when test="${ (not empty UserId) && (UserId eq dto.id) }">
 				   <tr>
 			         <td colspan="4" align="center">
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../mvcboard/pass.do?mode=edit&idx=${ param.idx }';">
+<%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/pass.do?mode=edit&idx=${ param.idx }';"> --%>
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardEdit.do?num=${ dto.num }';">
 		                    수정하기
 		                </button>
 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../mvcboard/pass.do?mode=delete&idx=${ param.idx }';">

@@ -153,4 +153,27 @@ public class BoardDAO extends DBConnPool {
 		return result;
 	}
 	
+//	수정하기
+	public int updatePost(BoardDTO dto) {
+		int result = 0;
+		try {
+//			수정을 위한 update 쿼리문 작성 (일련번호와 패스워드까지 조건문에 추가)
+			String query = "UPDATE pboard "
+						+ "SET title=?, content=?"
+						+ "WHERE num=?";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3,  dto.getNum());
+			
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

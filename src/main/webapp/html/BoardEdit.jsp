@@ -137,18 +137,20 @@ function validateForm(form) {
               
               
 <form name="writeForm" method="post" action="../board/boardWrite.do" onsubmit="return validateForm(this);">
+<!-- 글내용 수정을 위해 input hidden으로 게시글 번호 전달 -->
+<input type="hid-den"  name="idx" value="${ dto.num }"/>
 <table class="table" width="90%">
 <tr>
   <td>제목</td>
   <td>
-  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요"/>
+  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${ dto.title }"/> 
   </td>
 </tr>
 <!-- 게시물 내용 -->
 <tr>
   <td>내용</td>
   <td>
-  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;"></textarea>
+  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;">${ dto.content }</textarea>
   </td>
 </tr>
 <tr>
