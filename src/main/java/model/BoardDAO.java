@@ -192,4 +192,22 @@ public class BoardDAO extends DBConnPool {
 		return result;
 	}
 	
+//	게시물 조회수 증가하기
+	public void updateVisitCount(String num) {
+		String query =  "UPDATE pboard SET"
+						+ " visitcount = visitcount + 1"
+						+ " WHERE num=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			rs = psmt.executeQuery();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 조회수 증가 중 예외발생");
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

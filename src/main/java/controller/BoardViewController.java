@@ -13,12 +13,6 @@ import model.BoardDTO;
 @WebServlet("/board/boardView.do")
 public class BoardViewController extends HttpServlet {
 
-//	페이지 이동 용도
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/html/BoardView.jsp").forward(req, resp);
-	}
-	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -30,6 +24,7 @@ public class BoardViewController extends HttpServlet {
 		
 //		게시물 인출
 		BoardDTO dto = dao.selectView(num);
+		dao.updateVisitCount(num);
 		dao.close();
 
 		/*
