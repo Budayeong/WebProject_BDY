@@ -6,6 +6,13 @@
 <head>
   <%@ include file="../inc/board_head.jsp" %>
   <title>자유게시판 글작성</title>
+   <script>
+   function confirmDelete(url) {
+	   if (confirm("정말로 삭제하시겠습니까?")){
+		   location.href = url;
+	   } 
+	}
+  </script>
 </head>
 <body>
   <div class="container-scroller">
@@ -147,7 +154,8 @@
 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardEdit.do?num=${ dto.num }';">
 		                    수정하기
 		                </button>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../mvcboard/pass.do?mode=delete&idx=${ param.idx }';">
+<%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardDelete.do?num=${ dto.num }';"> --%>
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/boardDelete.do?num=${dto.num}')">
 		                    삭제하기
 		                </button>
 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/board.do';">

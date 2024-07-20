@@ -176,4 +176,20 @@ public class BoardDAO extends DBConnPool {
 		return result;
 	}
 	
+//	삭제하기
+	public int deletePost(String num) {
+		int result = 0;
+		try {
+			String query = "DELETE FROM pboard WHERE num=?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

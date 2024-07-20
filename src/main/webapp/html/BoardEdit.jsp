@@ -138,7 +138,7 @@ function validateForm(form) {
               
 <form name="writeForm" method="post" action="../board/boardWrite.do" onsubmit="return validateForm(this);">
 <!-- 글내용 수정을 위해 input hidden으로 게시글 번호 전달 -->
-<input type="hid-den"  name="idx" value="${ dto.num }"/>
+<input type="hid-den"  name="num" value="${ dto.num }"/>
 <table class="table" width="90%">
 <tr>
   <td>제목</td>
