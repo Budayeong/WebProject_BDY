@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자유게시판 글작성</title>
+  <title>자료실 글작성</title>
    <script>
    function confirmDelete(url) {
 	   if (confirm("정말로 삭제하시겠습니까?")){
@@ -113,8 +113,8 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">자유게시판</h3>
-                  <h6 class="font-weight-normal mb-0">특정한 주제없이 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">자료실</h3>
+                  <h6 class="font-weight-normal mb-0">파일을 첨부해 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
                 </div>
               </div>
             </div>
@@ -138,6 +138,16 @@
 			     <td>조회수</td> <td>${ dto.visitcount }</td>
 			   </tr>
 			   <tr>
+			     <td>첨부파일</td>
+		         <td>            
+<%-- 		         	${ dto.# } --%>
+		        	${ dto.ofile }
+		        	<a href="#">[다운로드]</a>
+		         </td>
+<%-- 			     <td>다운로드 수</td> <td>${ dto.# }</td> --%>
+			     <td>다운로드 수</td> <td>${ dto.visitcount }</td>
+			   </tr>
+			   <tr>
 			     <td>제목</td>
 			     <td colspan="3">${ dto.title }</td>
 			   </tr>
@@ -150,15 +160,13 @@
 				 <c:when test="${ (not empty UserId) && (UserId eq dto.id) }">
 				   <tr>
 			         <td colspan="4" align="center">
-<%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/pass.do?mode=edit&idx=${ param.idx }';"> --%>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardEdit.do?num=${ dto.num }';">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/fboardEdit.do?num=${ dto.num }';">
 		                    수정하기
 		                </button>
-<%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardDelete.do?num=${ dto.num }';"> --%>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/boardDelete.do?num=${dto.num}')">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/fboardDelete.do?num=${dto.num}')">
 		                    삭제하기
 		                </button>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/board.do';">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/fboard.do';">
 		                    목록 바로가기
 		                </button>
 			         </td>
@@ -167,7 +175,7 @@
 			     <c:otherwise>
 			        <tr>
 		              <td colspan="4" align="center">
-		                 <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/board.do';">
+		                 <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/fboard.do';">
 		                     목록 바로가기
 		                 </button>
 		              </td>

@@ -3,16 +3,31 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
+<script>
+function validateForm(form) { 
+
+    if (form.title.value == "") {
+        alert("제목을 입력하세요.");
+        form.title.focus();
+        return false;
+    }
+    if (form.content.value == "") {
+        alert("내용을 입력하세요.");
+        form.content.focus();
+        return false;
+    }
+    if (form.ofile.value == "") {
+        alert("파일을 첨부하세요.");
+        form.ofile.focus();
+        return false;
+    }
+    return true;
+}
+
+</script>
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자유게시판 글작성</title>
-   <script>
-   function confirmDelete(url) {
-	   if (confirm("정말로 삭제하시겠습니까?")){
-		   location.href = url;
-	   } 
-	}
-  </script>
+  <title>자료실 글수정</title>
 </head>
 <body>
   <div class="container-scroller">
@@ -124,57 +139,46 @@
           <div class="card">
             <div class="card-body">
               <div class="table-responsive">
-              <table class="table" width="90%">
-			   <colgroup>
-			     <col width="15%"/> <col width="35%"/>
-			     <col width="15%"/> <col width="*"/>
-			   </colgroup> 
-			   <tr>
-			     <td>번호</td> <td>${ dto.num } </td>
-			     <td>작성자</td> <td>${ dto.name }</td>
-			   </tr>
-			   <tr>
-			     <td>작성일</td> <td>${ dto.postdate }</td>
-			     <td>조회수</td> <td>${ dto.visitcount }</td>
-			   </tr>
-			   <tr>
-			     <td>제목</td>
-			     <td colspan="3">${ dto.title }</td>
-			   </tr>
-			   <tr>
-			     <td colspan="4" height="100">
-		         ${ dto.content }
-		    	 </td>
-			   </tr>
-			   <c:choose>
-				 <c:when test="${ (not empty UserId) && (UserId eq dto.id) }">
-				   <tr>
-			         <td colspan="4" align="center">
-<%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/pass.do?mode=edit&idx=${ param.idx }';"> --%>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardEdit.do?num=${ dto.num }';">
-		                    수정하기
-		                </button>
-<%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardDelete.do?num=${ dto.num }';"> --%>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/boardDelete.do?num=${dto.num}')">
-		                    삭제하기
-		                </button>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/board.do';">
-		                    목록 바로가기
-		                </button>
-			         </td>
-				    </tr>
-				 </c:when>
-			     <c:otherwise>
-			        <tr>
-		              <td colspan="4" align="center">
-		                 <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/board.do';">
-		                     목록 바로가기
-		                 </button>
-		              </td>
-			        </tr>
-			     </c:otherwise>
-			   </c:choose>
-			 </table>
+              
+              
+<form name="writeForm" method="post" enctype="multipart/form-data" action="../board/fboardWrite.do" onsubmit="return validateForm(this);">
+<table class="table" width="90%">
+<tr>
+  <td>제목</td>
+  <td>
+  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요"/>
+  </td>
+</tr>
+<tr>
+  <td>첨부파일</td>
+  <td>
+  	<input type="file" name="ofile" />
+  </td>
+</tr>
+<!-- 게시물 내용 -->
+<tr>
+  <td>내용</td>
+  <td>
+  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;"></textarea>
+  </td>
+</tr>
+<tr>
+   <td colspan="2" align="center">
+     <button type="submit" class="btn btn-primary btn-sm">
+         작성완료
+     </button>
+     <button type="reset" class="btn btn-primary btn-sm" >
+         다시하기
+     </button>
+     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/fboard.do';">
+           목록 바로가기
+     </button>
+   </td>
+</tr>
+</table>
+</form>
+			 
+			 
             </div>
           </div>
          </div>

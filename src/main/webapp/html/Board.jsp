@@ -71,7 +71,7 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/QBoard.do">Q&A게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">자료실</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/fboard.do">자료실</a></li>
               </ul>
             </div>
           </li>
@@ -108,7 +108,7 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">자유게시판</h3>
-                  <h6 class="font-weight-normal mb-0">특정한 주제없이 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h6 class="font-weight-normal mb-0">자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
                 </div>
               </div>
             </div>

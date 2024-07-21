@@ -13,7 +13,7 @@ function validateForm(form) {
     }
     if (form.content.value == "") {
         alert("내용을 입력하세요.");
-        form.title.focus();
+        form.content.focus();
         return false;
     }
     return true;
