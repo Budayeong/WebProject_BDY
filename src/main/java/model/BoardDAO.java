@@ -210,4 +210,8 @@ public class BoardDAO extends DBConnPool {
 		
 	}
 	
+	
+	
+	
+	
 }
