@@ -125,7 +125,7 @@ function validateForm(form) {
               <div class="table-responsive">
               
               
-<form name="writeForm" method="post" action="../board/boardWrite.do" onsubmit="return validateForm(this);">
+<form name="writeForm" method="post" action="../board/boardEdit.do" onsubmit="return validateForm(this);">
 <input type="hidden"  name="num" value="${ dto.num }"/>
 <table class="table" width="90%">
 <tr>

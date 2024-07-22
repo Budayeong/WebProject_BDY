@@ -136,15 +136,15 @@ function validateForm(form) {
               <div class="table-responsive">
               
               
-<form name="editForm" method="post" enctype="multipart/form-data" action="../board/fboardWrite.do" onsubmit="return validateForm(this);">
+<form name="editForm" method="post" enctype="multipart/form-data" action="../board/fboardEdit.do" onsubmit="return validateForm(this);">
 <!-- 글내용 수정을 위해 input hidden으로 게시글 번호 전달 -->
-<input type="hid-den"  name="num" value="${ dto.num }"/>
+<input type="hidden"  name="num" value="${ dto.num }"/>
 <!-- 
 기존 등록된 파일명을 설정. 만약 수정페이지에서 첨부파일을 변경하지 않는다면
 여기에 등록된 파일명을 이용해 update 할 예정.
  -->
-<input type="hid-den"  name="prevOfile" value="${ dto.ofile }"/>
-<input type="hid-den"  name="prevSfile" value="${ dto.sfile }"/>
+<input type="hidden"  name="prevOfile" value="${ dto.ofile }"/>
+<input type="hidden"  name="prevSfile" value="${ dto.sfile }"/>
 <table class="table" width="90%">
 <tr>
   <td>제목</td>
