@@ -12,15 +12,11 @@
 		   location.href = url;
 	   } 
 	}
-
-	    
   </script>
 </head>
 <body>
   <div class="container-scroller">
-    <!-- 네비 바 start -->
     <%@ include file="../inc/navbar.jsp" %> 
-	<!-- 유저메뉴 start -->
 	<c:if test="${ not empty UserId }">
 	          <li class="nav-item nav-profile dropdown">
 	            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
@@ -53,14 +49,10 @@
 	          </li>
 	        </ul>
 	</c:if>
-	<!-- 유저메뉴 end -->
         </ul>
       </div>
     </nav>
-    <!-- 네비 바 end -->
-    <!-- 페이지 내용 start  -->
     <div class="container-fluid page-body-wrapper">
-      <!-- 왼쪽 사이드 바 -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -83,7 +75,6 @@
               </ul>
             </div>
           </li>
-          <!-- 유저페이지 start -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="icon-head menu-icon"></i>
@@ -104,11 +95,8 @@
               </ul>
             </div>
           </li>
-          <!-- 유저페이지 end -->
         </ul>
       </nav>
-      <!-- 왼쪽 사이드 바 end -->
-      <!-- 게시판 start -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -138,15 +126,6 @@
 			   <tr>
 			     <td>작성일</td> <td>${ dto.postdate }</td>
 			     <td>조회수</td> <td>${ dto.visitcount }</td>
-			   </tr>
-			   <tr>
-			     <td >좋아요 수</td>
-		         <td colspan="3">            
-		         	<c:if test="${ not empty UserId }">
-		        		<button type="button" class="btn btn-primary btn-sm" id="likeCount">좋아요</button>
-		        	</c:if>
-		        	${ dto.likecount }
-		         </td>
 			   </tr>
 			   <tr>
 			     <td>제목</td>
@@ -190,15 +169,10 @@
           </div>
          </div>
        </div>
-        <!-- 테이블 end -->
-        <!-- 푸터 start  -->
         <%@ include file="../inc/footer.jsp" %> 
-        <!-- 푸터 end -->
         </div>
       </div>   
-      <!-- 게시판 end -->
   	</div>
-  	<!-- 페이지 내용 end  -->
 
   <!-- plugins:js -->
   <%@ include file="../inc/js.jsp" %>

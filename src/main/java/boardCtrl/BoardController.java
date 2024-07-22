@@ -1,4 +1,4 @@
-package controller;
+package boardCtrl;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -78,7 +78,7 @@ public class BoardController extends HttpServlet{
 		
 		
 //		list 페이지로 이동
-		req.getRequestDispatcher("/html/Board.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Board/Board.jsp").forward(req, resp);
 		
 	}
 	

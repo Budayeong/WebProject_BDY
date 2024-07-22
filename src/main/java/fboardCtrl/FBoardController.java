@@ -1,4 +1,4 @@
-package controller.fboard;
+package fboardCtrl;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -78,7 +78,7 @@ public class FBoardController extends HttpServlet{
 		
 		
 //		list 페이지로 이동
-		req.getRequestDispatcher("/html/FBoard.jsp").forward(req, resp);
+		req.getRequestDispatcher("/FBoard/FBoard.jsp").forward(req, resp);
 		
 	}
 	

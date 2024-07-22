@@ -26,9 +26,7 @@ function validateForm(form) {
 </head>
 <body>
   <div class="container-scroller">
-    <!-- 네비 바 start -->
     <%@ include file="../inc/navbar.jsp" %> 
-	<!-- 유저메뉴 start -->
 	<c:if test="${ not empty UserId }">
 	          <li class="nav-item nav-profile dropdown">
 	            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
@@ -61,14 +59,10 @@ function validateForm(form) {
 	          </li>
 	        </ul>
 	</c:if>
-	<!-- 유저메뉴 end -->
         </ul>
       </div>
     </nav>
-    <!-- 네비 바 end -->
-    <!-- 페이지 내용 start  -->
     <div class="container-fluid page-body-wrapper">
-      <!-- 왼쪽 사이드 바 -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -91,7 +85,6 @@ function validateForm(form) {
               </ul>
             </div>
           </li>
-          <!-- 유저페이지 start -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="icon-head menu-icon"></i>
@@ -112,11 +105,8 @@ function validateForm(form) {
               </ul>
             </div>
           </li>
-          <!-- 유저페이지 end -->
         </ul>
       </nav>
-      <!-- 왼쪽 사이드 바 end -->
-      <!-- 게시판 start -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -129,7 +119,6 @@ function validateForm(form) {
               </div>
             </div>
           </div>
-          <!-- 테이블  -->
         <div class="col-md-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
@@ -137,8 +126,7 @@ function validateForm(form) {
               
               
 <form name="writeForm" method="post" action="../board/boardWrite.do" onsubmit="return validateForm(this);">
-<!-- 글내용 수정을 위해 input hidden으로 게시글 번호 전달 -->
-<input type="hid-den"  name="num" value="${ dto.num }"/>
+<input type="hidden"  name="num" value="${ dto.num }"/>
 <table class="table" width="90%">
 <tr>
   <td>제목</td>
@@ -146,7 +134,6 @@ function validateForm(form) {
   	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${ dto.title }"/> 
   </td>
 </tr>
-<!-- 게시물 내용 -->
 <tr>
   <td>내용</td>
   <td>
@@ -174,15 +161,10 @@ function validateForm(form) {
           </div>
          </div>
        </div>
-        <!-- 테이블 end -->
-        <!-- 푸터 start  -->
         <%@ include file="../inc/footer.jsp" %> 
-        <!-- 푸터 end -->
         </div>
       </div>   
-      <!-- 게시판 end -->
   	</div>
-  	<!-- 페이지 내용 end  -->
 
   <!-- plugins:js -->
   <%@ include file="../inc/js.jsp" %>

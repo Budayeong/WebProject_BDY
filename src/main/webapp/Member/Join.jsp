@@ -15,11 +15,6 @@
 	        form.join_id.focus();
 	        return false;
 	    }
-	    if (form.join_id.value.length < 6 || form.join_id.value.length > 12) {
-	        alert("아이디는 영문소문자 또는 숫자 6~12자로 입력해 주세요");
-	        form.join_id.focus();
-	        return false;
-	    }
 	    if (form.checkId.value !== "check") {
 	        alert("아이디 중복체크를 진행하세요.");
 	        form.checkId.focus();
@@ -72,11 +67,18 @@ $(function() {
 
     $("#idCheck").click(function() {
         var join_id = $('input[name="join_id"]').val();
+        var id_pattern = /^[a-z0-9]{6,12}$/;
         
 //         아이디가 입력되지않았으면 입력 안내
         if (join_id === "") {
             alert("아이디를 입력하세요.");
             return;
+        }
+//         아이디가 패턴에 맞지않으면 반려
+        if (!id_pattern.test(join_id)) {
+        	alert("아이디는 영문소문자 또는 숫자 6~12자로 입력해 주세요");
+	        form.join_id.focus();
+	        return false;
         }
 
         $.ajax({
@@ -114,7 +116,7 @@ function errFunc(errData) {
               </div>
                ${ JoinErrMsg }
               <h3>회원가입</h3>
-              <form name="joinForm" class="pt-3" method="post" onsubmit="return validateForm(this);" action="${pageContext.request.contextPath}/member/Join.do">
+              <form name="joinForm" class="pt-3" method="post" onsubmit="return validateForm(this);" action="${pageContext.request.contextPath}/member/join.do">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="join_id" placeholder="아이디 (영문소문자/숫자, 6~12자)"></br>
                   <button type="button" name="idCheck" id="idCheck">중복 확인</button>

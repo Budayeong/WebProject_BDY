@@ -1,4 +1,4 @@
-package controller;
+package boardCtrl;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class BoardWriteController extends HttpServlet {
 			return;
 		}
 		
-		req.getRequestDispatcher("/html/BoardWrite.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Board/BoardWrite.jsp").forward(req, resp);
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package controller;
+package memberCtrl;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/html/Login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Member/Login.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
 		
 		if(dto.getId() == null || dto.getId().equals("")) {
 //			로그인에 실패한 경우
-			common.JSFunction.alertLocation(resp, "아이디 또는 비밀번호가 일치하지않습니다.", req.getContextPath()+"/html/Login.jsp");
+			common.JSFunction.alertLocation(resp, "아이디 또는 비밀번호가 일치하지않습니다.", req.getContextPath()+"/Member/Login.jsp");
 		}
 		else {
 //			로그인에 성공한 경우: 세션영역에 회원정보 저장

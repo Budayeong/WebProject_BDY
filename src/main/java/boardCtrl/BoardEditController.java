@@ -1,4 +1,4 @@
-package controller;
+package boardCtrl;
 
 import java.io.IOException;
 
@@ -38,7 +38,7 @@ public class BoardEditController extends HttpServlet {
 		
 //		선택된 게시글의 내용을 반환
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/html/BoardEdit.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Board/BoardEdit.jsp").forward(req, resp);
 	}
 	
 	@Override

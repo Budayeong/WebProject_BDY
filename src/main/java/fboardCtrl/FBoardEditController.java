@@ -1,4 +1,4 @@
-package controller.fboard;
+package fboardCtrl;
 
 import java.io.IOException;
 
@@ -41,7 +41,7 @@ public class FBoardEditController extends HttpServlet {
 		FBoardDTO dto = dao.selectView(num);
 //		DTO를 request영역에 저장한 후 수정페이지로 포워드
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/html/FBoardEdit.jsp").forward(req, resp);
+		req.getRequestDispatcher("/FBoard/FBoardEdit.jsp").forward(req, resp);
 	}
 
 //	수정할 내용을 입력한 후 전송된 폼값을 update 쿼리문으로 실행

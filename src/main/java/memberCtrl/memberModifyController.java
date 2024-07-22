@@ -1,4 +1,4 @@
-package controller;
+package memberCtrl;
 
 import java.io.IOException;
 
@@ -28,9 +28,7 @@ public class memberModifyController extends HttpServlet {
 		req.getSession().setAttribute("UserEmail", dto.getEmail());
 		req.getSession().setAttribute("UserTel", dto.getTel());
 		
-		
-		req.getRequestDispatcher("/html/memberModify.jsp").forward(req, resp);
-		
+		req.getRequestDispatcher("/Member/MemberModify.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -66,8 +64,7 @@ public class memberModifyController extends HttpServlet {
 		}
 		else {
 			System.out.println("업데이트 실패");
-			req.getRequestDispatcher("../html/memberModify.jsp");
-			resp.sendRedirect("../html/memberModify.jsp");
+			resp.sendRedirect("../Member/MemberModify.jsp");
 		}
 		
 		

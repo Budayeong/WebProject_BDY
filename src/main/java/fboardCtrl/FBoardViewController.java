@@ -1,4 +1,4 @@
-package controller.fboard;
+package fboardCtrl;
 
 import java.io.IOException;
 
@@ -41,6 +41,6 @@ public class FBoardViewController extends HttpServlet {
 		
 //		게시물이 저장된 DTO 객체를 request영역에 저장, JSP로 포워드
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/html/FBoardView.jsp").forward(req, resp);
+		req.getRequestDispatcher("/FBoard/FBoardView.jsp").forward(req, resp);
 	}
 }

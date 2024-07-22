@@ -1,4 +1,4 @@
-package controller.fboard;
+package fboardCtrl;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ public class FBoardWriteController extends HttpServlet {
 			JSFunction.alertLocation(resp, "로그인 후 이용가능합니다.", "../member/login.do");
 			return;
 		}
-		req.getRequestDispatcher("/html/FBoardWrite.jsp").forward(req, resp);
+		req.getRequestDispatcher("/FBoard/FBoardWrite.jsp").forward(req, resp);
 	}
 	
 	/*

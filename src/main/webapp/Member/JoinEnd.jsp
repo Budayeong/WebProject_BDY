@@ -30,11 +30,11 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="../assets/images/logo.svg" alt="logo">
               </div>
               <h3>회원가입 성공</h3>
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="location.href='${pageContext.request.contextPath}/member/Login.do'">로그인 하러 가기</button>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="location.href='${pageContext.request.contextPath}/member/login.do'">로그인 하러 가기</button>
                 </div>
             </div>
           </div>

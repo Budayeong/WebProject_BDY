@@ -11,14 +11,7 @@ public class BoardDTO {
 	private String name;
 	private Date postdate;
 	private String visitcount;
-	private String likecount;
 	
-	public String getLikecount() {
-		return likecount;
-	}
-	public void setLikecount(String likecount) {
-		this.likecount = likecount;
-	}
 	public String getNum() {
 		return num;
 	}

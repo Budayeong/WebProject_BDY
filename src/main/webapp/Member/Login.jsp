@@ -55,11 +55,6 @@
                   </div>
                   <a href="#" class="auth-link text-black">비밀번호 찾기</a>
                 </div>
-<!--                 <div class="mb-2"> -->
-<!--                   <button type="button" class="btn btn-block btn-facebook auth-form-btn"> -->
-<!--                     <i class="ti-facebook mr-2"></i>페이스북계정 로그인 -->
-<!--                   </button> -->
-<!--                 </div> -->
                 <div class="text-center mt-4 font-weight-light">
                   계정이 없으신가요? <a href="${pageContext.request.contextPath}/member/join.do" class="text-primary">회원가입</a>
                 </div>
