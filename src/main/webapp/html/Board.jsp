@@ -156,6 +156,7 @@
 	                      <th>작성자</th>
 	                      <th>작성일</th>
 	                      <th>조회수</th>
+	                      <th>좋아요</th>
 	                    </tr>
 	                  </thead>
 	                  <tbody>
@@ -186,6 +187,7 @@
 							            <td>${ row.name }</td>
 							            <td>${ row.postdate }</td>
 							            <td>${ row.visitcount }</td>
+							            <td>${ row.likecount }</td>
 							        </tr>
 							     <c:set var="countNum" value="${countNum + 1}" />
 								</c:forEach>		

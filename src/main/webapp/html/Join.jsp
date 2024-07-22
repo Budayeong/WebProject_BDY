@@ -83,7 +83,6 @@ $(function() {
             data: { user_id: join_id },
             success: function(responseData) {
                 if (responseData === "0") {
-//                     alert("아이디 사용 가능");
                     $("#checkResult").css("color","green").text("사용가능한 아이디");
                     $('input[name="checkId"]').val("check");
                 } else {

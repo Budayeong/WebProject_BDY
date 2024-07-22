@@ -12,6 +12,8 @@
 		   location.href = url;
 	   } 
 	}
+
+	    
   </script>
 </head>
 <body>
@@ -136,6 +138,15 @@
 			   <tr>
 			     <td>작성일</td> <td>${ dto.postdate }</td>
 			     <td>조회수</td> <td>${ dto.visitcount }</td>
+			   </tr>
+			   <tr>
+			     <td >좋아요 수</td>
+		         <td colspan="3">            
+		         	<c:if test="${ not empty UserId }">
+		        		<button type="button" class="btn btn-primary btn-sm" id="likeCount">좋아요</button>
+		        	</c:if>
+		        	${ dto.likecount }
+		         </td>
 			   </tr>
 			   <tr>
 			     <td>제목</td>

@@ -79,6 +79,7 @@ public class BoardDAO extends DBConnPool {
 				dto.setName(rs.getString("name"));
 				dto.setPostdate(rs.getDate("postdate"));
 				dto.setVisitcount(rs.getString("visitcount"));
+				dto.setLikecount(rs.getString("likecount"));
 				
 //				레코드 하나를 dto에 저장 후 List에 추가
 				boardList.add(dto);
@@ -115,6 +116,7 @@ public class BoardDAO extends DBConnPool {
 				dto.setName(rs.getString(5));
 				dto.setPostdate(rs.getDate(6));
 				dto.setVisitcount(rs.getString(7));
+				dto.setLikecount(rs.getString(8));
 			}
 		}
 		catch (Exception e) {
@@ -210,7 +212,22 @@ public class BoardDAO extends DBConnPool {
 		
 	}
 	
-	
+//	게시물 좋아요 증가
+	public int downCountPlus(String idx) {
+		int result = 0;
+		String sql =  "UPDATE pboard SET"
+						+ " likecount = likecount + 1"
+						+ " WHERE num=?";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {}
+		return result;
+	}
+
 	
 	
 	
