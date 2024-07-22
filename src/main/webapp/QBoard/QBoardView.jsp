@@ -3,26 +3,16 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
-<script>
-function validateForm(form) { 
-
-    if (form.title.value == "") {
-        alert("제목을 입력하세요.");
-        form.title.focus();
-        return false;
-    }
-    if (form.content.value == "") {
-        alert("내용을 입력하세요.");
-        form.title.focus();
-        return false;
-    }
-    return true;
-}
-
-</script>
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자유게시판 글수정</title>
+  <title>QnA 상세보기</title>
+   <script>
+   function confirmDelete(url) {
+	   if (confirm("정말로 삭제하시겠습니까?")){
+		   location.href = url;
+	   } 
+	}
+  </script>
 </head>
 <body>
   <div class="container-scroller">
@@ -80,7 +70,7 @@ function validateForm(form) {
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../board/qBoard.do">Q&A게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/qboard.do">Q&A게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/fboard.do">자료실</a></li>
               </ul>
             </div>
@@ -113,8 +103,8 @@ function validateForm(form) {
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">자유게시판</h3>
-                  <h6 class="font-weight-normal mb-0">특정한 주제없이 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">QnA 게시판</h3>
+                  <h6 class="font-weight-normal mb-0">질문과 답변을 하는 공간입니다<span class="text-primary">3 unread alerts!</span></h6>
                 </div>
               </div>
             </div>
@@ -123,40 +113,95 @@ function validateForm(form) {
           <div class="card">
             <div class="card-body">
               <div class="table-responsive">
-              
-              
-<form name="writeForm" method="post" action="../board/boardEdit.do" onsubmit="return validateForm(this);">
-<input type="hidden"  name="num" value="${ dto.num }"/>
-<table class="table" width="90%">
-<tr>
-  <td>제목</td>
-  <td>
-  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${ dto.title }"/> 
-  </td>
-</tr>
-<tr>
-  <td>내용</td>
-  <td>
-  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;">${ dto.content }</textarea>
-  </td>
-</tr>
-<tr>
-   <td colspan="2" align="center">
-     <button type="submit" class="btn btn-primary btn-sm">
-         작성완료
-     </button>
-     <button type="reset" class="btn btn-primary btn-sm" >
-         다시하기
-     </button>
-     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/board.do';">
-           목록 바로가기
-     </button>
-   </td>
-</tr>
-</table>
-</form>
-			 
-			 
+              <table class="table" width="90%">
+			   <colgroup>
+			     <col width="15%"/> <col width="35%"/>
+			     <col width="15%"/> <col width="*"/>
+			   </colgroup> 
+			   <tr>
+			     <td>번호</td> <td>${ dto.num } </td>
+			     <td>작성자</td> <td>${ dto.name }</td>
+			   </tr>
+			   <tr>
+			     <td>작성일</td> <td>${ dto.postdate }</td>
+			     <td>조회수</td> <td>${ dto.visitcount }</td>
+			   </tr>
+			   <tr>
+			     <td>첨부파일</td>
+		         <td>            
+		        	${ dto.ofile }
+		        	<c:choose>
+		        		<c:when test="${not empty dto.ofile}">
+				        	<a href="../board/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&num=${ dto.num }">[다운로드]</a>
+		        		</c:when>
+		        		<c:otherwise>
+		        			X
+		        		</c:otherwise>
+		        	</c:choose>
+		         </td>
+			     <td>다운로드 수</td> <td>${ dto.downcount }</td>
+			   </tr>
+			   <tr>
+			     <td>제목</td>
+			     <td colspan="3">${ dto.title }</td>
+			   </tr>
+			   <tr>
+			     <td colspan="4" height="100">
+		         	${ dto.content }
+		         	<br/>
+		         	<br/>
+<!-- 이미지일때 -->
+<c:if test="${not empty dto.ofile and fileType eq 'img'}">
+	<img src="../uploads/${ dto.sfile }" style="width: 450px; height: 450px; border-radius: 0;" />
+</c:if>
+
+<!-- 비디오일때 -->
+<c:if test="${not empty dto.ofile and fileType eq 'video'}">
+    <div>
+        <video controls>
+            <source src="../uploads/${ dto.sfile }" style="width: 450px; height: 450px; border-radius: 0;">
+        </video>
+    </div>
+</c:if>
+
+<!-- 음원일때 -->
+<c:if test="${not empty dto.ofile and fileType eq 'sound'}">
+    <div>
+        <audio controls>
+            <source src="../uploads/${ dto.sfile }" style="width: 450px; height: 450px; border-radius: 0;">
+        </audio>
+    </div>
+</c:if>
+
+		    	 </td>
+			   </tr>
+			   <c:choose>
+				 <c:when test="${ (not empty UserId) && (UserId eq dto.id) }">
+				   <tr>
+			         <td colspan="4" align="center">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/qboardEdit.do?num=${ dto.num }&id=${ dto.id }';">
+		                    수정하기
+		                </button>
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/qboardDelete.do?num=${dto.num}&id=${ dto.id }')">
+		                    삭제하기
+		                </button>
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/qboard.do';">
+		                    목록 바로가기
+		                </button>
+			         </td>
+				    </tr>
+				 </c:when>
+			     <c:otherwise>
+			        <tr>
+		              <td colspan="4" align="center">
+		                 <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/qboard.do';">
+		                     목록 바로가기
+		                 </button>
+		              </td>
+			        </tr>
+			     </c:otherwise>
+			   </c:choose>
+			 </table>
             </div>
           </div>
          </div>

@@ -76,7 +76,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../board/QBoard.do">Q&A게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/qboard.do">Q&A게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/fboard.do">자료실</a></li>
               </ul>
             </div>
@@ -140,7 +140,6 @@
 			   <tr>
 			     <td>첨부파일</td>
 		         <td>            
-<%-- 		         	${ dto.# } --%>
 		        	${ dto.ofile }
 		        	<a href="../board/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&num=${ dto.num }">[다운로드]</a>
 		         </td>
@@ -152,7 +151,32 @@
 			   </tr>
 			   <tr>
 			     <td colspan="4" height="100">
-		         ${ dto.content }
+		         	${ dto.content }
+		         	<br/>
+		         	<br/>
+<!-- 이미지일때 -->
+<c:if test="${not empty dto.ofile and fileType eq 'img'}">
+	<img src="../uploads/${ dto.sfile }" style="width: 450px; height: 450px; border-radius: 0;" />
+</c:if>
+
+<!-- 비디오일때 -->
+<c:if test="${not empty dto.ofile and fileType eq 'video'}">
+    <div>
+        <video controls>
+            <source src="../uploads/${ dto.sfile }" style="width: 450px; height: 450px; border-radius: 0;">
+        </video>
+    </div>
+</c:if>
+
+<!-- 음원일때 -->
+<c:if test="${not empty dto.ofile and fileType eq 'sound'}">
+    <div>
+        <audio controls>
+            <source src="../uploads/${ dto.sfile }" style="width: 450px; height: 450px; border-radius: 0;">
+        </audio>
+    </div>
+</c:if>
+
 		    	 </td>
 			   </tr>
 			   <c:choose>

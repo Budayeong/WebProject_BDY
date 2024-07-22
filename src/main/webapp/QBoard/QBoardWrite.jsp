@@ -13,7 +13,7 @@ function validateForm(form) {
     }
     if (form.content.value == "") {
         alert("내용을 입력하세요.");
-        form.title.focus();
+        form.content.focus();
         return false;
     }
     return true;
@@ -22,7 +22,7 @@ function validateForm(form) {
 </script>
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자유게시판 글수정</title>
+  <title>QnA 글쓰기</title>
 </head>
 <body>
   <div class="container-scroller">
@@ -80,7 +80,7 @@ function validateForm(form) {
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../board/qBoard.do">Q&A게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/qboard.do">Q&A게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/fboard.do">자료실</a></li>
               </ul>
             </div>
@@ -113,8 +113,8 @@ function validateForm(form) {
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">자유게시판</h3>
-                  <h6 class="font-weight-normal mb-0">특정한 주제없이 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">QnA 게시판</h3>
+                  <h6 class="font-weight-normal mb-0">질문과 답변을 하는 공간입니다<span class="text-primary">3 unread alerts!</span></h6>
                 </div>
               </div>
             </div>
@@ -125,19 +125,24 @@ function validateForm(form) {
               <div class="table-responsive">
               
               
-<form name="writeForm" method="post" action="../board/boardEdit.do" onsubmit="return validateForm(this);">
-<input type="hidden"  name="num" value="${ dto.num }"/>
+<form name="writeForm" method="post" enctype="multipart/form-data" action="../board/qboardWrite.do" onsubmit="return validateForm(this);">
 <table class="table" width="90%">
 <tr>
   <td>제목</td>
   <td>
-  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${ dto.title }"/> 
+  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요"/>
+  </td>
+</tr>
+<tr>
+  <td>첨부파일</td>
+  <td>
+  	<input type="file" name="ofile" />
   </td>
 </tr>
 <tr>
   <td>내용</td>
   <td>
-  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;">${ dto.content }</textarea>
+  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;"></textarea>
   </td>
 </tr>
 <tr>
@@ -148,7 +153,7 @@ function validateForm(form) {
      <button type="reset" class="btn btn-primary btn-sm" >
          다시하기
      </button>
-     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/board.do';">
+     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/qboard.do';">
            목록 바로가기
      </button>
    </td>

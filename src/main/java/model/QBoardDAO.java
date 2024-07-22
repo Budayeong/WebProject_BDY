@@ -6,15 +6,15 @@ import java.util.Vector;
 
 import common.DBConnPool;
 
-public class FBoardDAO extends DBConnPool {
+public class QBoardDAO extends DBConnPool {
 	
-	public FBoardDAO() {} 
+	public QBoardDAO() {} 
 	
 //	게시물 개수 카운트
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 		
-		String query = "SELECT COUNT(*) FROM fboard";
+		String query = "SELECT COUNT(*) FROM qboard";
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField")+ " " 
 					+ " LIKE '%" + map.get("searchWord") + "%'"; 
@@ -38,9 +38,9 @@ public class FBoardDAO extends DBConnPool {
 	
 
 //	게시물 목록 반환
-	public List<FBoardDTO> selectListPage(Map<String, Object> map) {
+	public List<QBoardDTO> selectListPage(Map<String, Object> map) {
 		
-		List<FBoardDTO> board = new Vector<FBoardDTO>();
+		List<QBoardDTO> board = new Vector<QBoardDTO>();
 		
 		/*
 		페이징 처리를 위한 서브쿼리문 작성. 게시물의 순차적인 일련번호를 부여하는
@@ -48,7 +48,7 @@ public class FBoardDAO extends DBConnPool {
 		*/
 		String query ="SELECT * FROM ( "
 				+ "    SELECT Tb.*, ROWNUM rNum FROM ( "
-				+ "        SELECT * FROM fboard ";
+				+ "        SELECT * FROM qboard ";
 		
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField")
@@ -67,7 +67,7 @@ public class FBoardDAO extends DBConnPool {
 			rs = psmt.executeQuery();
 
 			while(rs.next()) {
-				FBoardDTO dto = new FBoardDTO();
+				QBoardDTO dto = new QBoardDTO();
 				
 				dto.setNum(rs.getString(1));
 				dto.setTitle(rs.getString(2));
@@ -92,12 +92,12 @@ public class FBoardDAO extends DBConnPool {
 	
 //	상세보기: 게시물 한개 반환
 //	상세보기를 위해 일련번호에 해당하는 레코드 1개를 인출해서 반환
-	public FBoardDTO selectView(String num) {
+	public QBoardDTO selectView(String num) {
 		
-		FBoardDTO dto = new FBoardDTO();
+		QBoardDTO dto = new QBoardDTO();
 		
 //		인파라미터가 있는 select 쿼리문
-		String query = "SELECT * FROM fboard WHERE num=?";
+		String query = "SELECT * FROM qboard WHERE num=?";
 		try {
 //			인파라미터 설정 및 쿼리실행
 			psmt = con.prepareStatement(query);
@@ -127,14 +127,14 @@ public class FBoardDAO extends DBConnPool {
 	}
 	
 //	글쓰기 페이지에서 전송한 폼값을 테이블에 insert
-	public int insertWrite(FBoardDTO dto) {
+	public int insertWrite(QBoardDTO dto) {
 		int result = 0 ;
 		try{
 
-			String query = "INSERT INTO fboard ( "
+			String query = "INSERT INTO qboard ( "
 						+ " num, title, content, id, name, ofile, sfile) "
 						+ " VALUES ( "
-						+ " seq_fboard_num.NEXTVAL, ?, ?, ?, ?, ?, ? )";
+						+ " seq_qboard_num.NEXTVAL, ?, ?, ?, ?, ?, ? )";
 
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
@@ -154,11 +154,11 @@ public class FBoardDAO extends DBConnPool {
 	}
 	
 //	게시물 수정
-	public int updatePost(FBoardDTO dto) {
+	public int updatePost(QBoardDTO dto) {
 		int result = 0;
 		try {
 //			수정을 위한 update 쿼리문 작성 (일련번호와 패스워드까지 조건문에 추가)
-			String query = "UPDATE fboard "
+			String query = "UPDATE qboard "
 						+ "SET title=?, content=?, ofile=?, sfile=? "
 						+ "WHERE num=?";
 			
@@ -182,7 +182,7 @@ public class FBoardDAO extends DBConnPool {
 	public int deletePost(String num) {
 		int result = 0;
 		try {
-			String query = "DELETE FROM fboard WHERE num=?";
+			String query = "DELETE FROM qboard WHERE num=?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, num);
 			result = psmt.executeUpdate();
@@ -198,7 +198,7 @@ public class FBoardDAO extends DBConnPool {
 	
 //	게시물 조회수 증가하기
 	public void updateVisitCount(String num) {
-		String query =  "UPDATE fboard SET"
+		String query =  "UPDATE qboard SET"
 						+ " visitcount = visitcount + 1"
 						+ " WHERE num=?";
 		
@@ -219,7 +219,7 @@ public class FBoardDAO extends DBConnPool {
 	
 //	파일 다운로드 카운트 증가
 	public void downCountPlus(String num) {
-		String sql =  "UPDATE fboard SET"
+		String sql =  "UPDATE qboard SET"
 						+ " downcount = downcount + 1"
 						+ " WHERE num=?";
 		

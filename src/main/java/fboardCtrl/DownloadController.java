@@ -1,4 +1,4 @@
-package controller;
+package fboardCtrl;
 
 import java.io.IOException;
 

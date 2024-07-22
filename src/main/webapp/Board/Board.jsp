@@ -64,7 +64,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../board/QBoard.do">Q&A게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/qBoard.do">Q&A게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/fboard.do">자료실</a></li>
               </ul>
             </div>

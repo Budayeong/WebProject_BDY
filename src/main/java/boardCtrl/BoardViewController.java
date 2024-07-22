@@ -22,17 +22,19 @@ public class BoardViewController extends HttpServlet {
 		
 //		파라미터로 전달된 일련번호 받기
 		String num = req.getParameter("num");
+//		현재 로그인한 유저의 아이디
+		String UserId = (String) req.getSession().getAttribute("UserId");
 		
 //		게시물 인출
 		BoardDTO dto = dao.selectView(num);
 		
 //		페이지로 진입하면 "visit현재게시글번호" 라는 쿠키가 있는지 확인
-		String visitCookieOk = CookieManager.readCookie(req, "visit"+num);
+		String visitCookieOk = CookieManager.readCookie(req, "board_visit"+num+UserId);
 		if(visitCookieOk.equals("")){
 			// 게시물 조회수 증가
 			dao.updateVisitCount(num);
 			// 	쿠키 생성
-			CookieManager.makeCookie(resp, "visit"+num, "visit"+num , 86400);
+			CookieManager.makeCookie(resp, "board_visit"+num+UserId, "board_visit"+num+UserId , 86400);
 		}
 		dao.close();
 

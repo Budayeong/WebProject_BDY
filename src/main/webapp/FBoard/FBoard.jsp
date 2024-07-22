@@ -70,7 +70,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../board/QBoard.do">Q&A게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/qboard.do">Q&A게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/fboard.do">자료실</a></li>
               </ul>
             </div>
@@ -190,7 +190,7 @@
 							            <td>
 							            <!-- 다운로드 링크는 첨부파일이 있을때만 표시 -->
 							            <c:if test="${ not empty row.ofile }">
-							            	<a href="#">[Down]</a>	
+							            	<a href="../board/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&num=${ row.num }">[Down]</a>	
 							            </c:if>
 							            </td>
 							        </tr>

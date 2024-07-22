@@ -3,26 +3,9 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
-<script>
-function validateForm(form) { 
-
-    if (form.title.value == "") {
-        alert("제목을 입력하세요.");
-        form.title.focus();
-        return false;
-    }
-    if (form.content.value == "") {
-        alert("내용을 입력하세요.");
-        form.title.focus();
-        return false;
-    }
-    return true;
-}
-
-</script>
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자유게시판 글수정</title>
+  <title>QnA 게시판</title>
 </head>
 <body>
   <div class="container-scroller">
@@ -62,6 +45,7 @@ function validateForm(form) {
         </ul>
       </div>
     </nav>
+    
     <div class="container-fluid page-body-wrapper">
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
@@ -80,7 +64,7 @@ function validateForm(form) {
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../board/board.do">자유게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../board/qBoard.do">Q&A게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../board/qboard.do">Q&A게시판</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../board/fboard.do">자료실</a></li>
               </ul>
             </div>
@@ -113,54 +97,98 @@ function validateForm(form) {
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">자유게시판</h3>
-                  <h6 class="font-weight-normal mb-0">특정한 주제없이 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">QnA 게시판</h3>
+                  <h6 class="font-weight-normal mb-0">질문과 답변을 하는 공간입니다<span class="text-primary">3 unread alerts!</span></h6>
                 </div>
               </div>
             </div>
           </div>
         <div class="col-md-12 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="table-responsive">
-              
-              
-<form name="writeForm" method="post" action="../board/boardEdit.do" onsubmit="return validateForm(this);">
-<input type="hidden"  name="num" value="${ dto.num }"/>
-<table class="table" width="90%">
-<tr>
-  <td>제목</td>
-  <td>
-  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${ dto.title }"/> 
-  </td>
-</tr>
-<tr>
-  <td>내용</td>
-  <td>
-  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;">${ dto.content }</textarea>
-  </td>
-</tr>
-<tr>
-   <td colspan="2" align="center">
-     <button type="submit" class="btn btn-primary btn-sm">
-         작성완료
-     </button>
-     <button type="reset" class="btn btn-primary btn-sm" >
-         다시하기
-     </button>
-     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/board.do';">
-           목록 바로가기
-     </button>
-   </td>
-</tr>
-</table>
-</form>
-			 
-			 
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+					<div class="form-group">
+			            <div class="justify-content-end d-flex">
+			                <button type="button" class="btn btn-outline-primary btn-icon-text" onclick="location.href='../board/qboardWrite.do'">
+	                          <i class="ti-file btn-icon-prepend"></i>
+	                          글쓰기
+	                        </button>
+			            </div>
+				    </div>
+					<form method="get">
+					    <div class="form-group">
+					        <div class="input-group">
+					            <div class="input-group-prepend">
+					                <select class="btn btn-sm btn-outline-primary dropdown-toggle" name="searchField">
+					                    <option value="title">제목</option>
+					                    <option value="content">내용</option>
+					                    <option value="name">작성자</option>
+					                </select>
+					            </div>
+					            <input type="text" class="form-control" name="searchWord" aria-label="Text input with dropdown button">
+					            <div class="input-group-append">
+					                <input type="submit" value="검색하기" class="btn btn-sm btn-primary" />
+					            </div>
+					        </div>
+					    </div>
+					</form>
+	                <table class="table">
+	                  <thead>
+	                    <tr>
+	                      <th>No</th>
+	                      <th>제목</th>
+	                      <th>작성자</th>
+	                      <th>작성일</th>
+	                      <th>조회수</th>
+	                      <th>첨부파일</th>
+	                    </tr>
+	                  </thead>
+	                  <tbody>
+						<c:choose>
+							<c:when test="${ empty boardLists }">
+						        <tr>
+						            <td colspan="5" align="center">
+						                등록된 게시물이 없습니다^^*
+						            </td>
+						        </tr>
+							</c:when>
+							<c:otherwise>
+								<c:set var="countNum" value="0" />     
+								<c:forEach items="${ boardLists }" var="row" varStatus="loop">
+							        <tr>
+							            <td>
+								            	${ boardParam.totalCount - (((boardParam.pageNum - 1) * boardParam.pageSize) + countNum) }
+							            </td>
+							            <td>
+							            	<a href="../board/qboardView.do?num=${ row.num }">${ row.title }</a>
+							            </td> 
+							            <td>${ row.name }</td>
+							            <td>${ row.postdate }</td>
+							            <td>${ row.visitcount }</td>
+							            <td>
+							            <c:if test="${ not empty row.ofile }">
+							            	<a href="../board/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&num=${ row.num }">[Down]</a>	
+							            </c:if>
+							            </td>
+							        </tr>
+							     <c:set var="countNum" value="${countNum + 1}" />
+								</c:forEach>		
+							</c:otherwise>
+						</c:choose>
+	                  </tbody>
+	                </table>
+					<table width="100%">
+					  <tr align="center">
+					  	<td>
+					  		<br/>
+					  		${ boardParam.boardPaging }
+					  	</td>
+					  </tr>
+					</table>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-         </div>
-       </div>
         <%@ include file="../inc/footer.jsp" %> 
         </div>
       </div>   
