@@ -16,13 +16,20 @@ public class BoardEditController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		선택된 게시글의 번호 받음
+		String num = req.getParameter("num");
+		String id = req.getParameter("id");
+		System.out.println(num +"/" + id);
+		
 		if(req.getSession().getAttribute("UserId") == null){
 			JSFunction.alertLocation(resp, "로그인 후 이용가능합니다.", "../member/login.do");
 			return;
 		}
+		if(!(req.getSession().getAttribute("UserId").equals(id))) {
+			JSFunction.alertBack(resp, "잘못된 접근입니다.");
+			return;
+		}
 		
-//		선택된 게시글의 번호 받음
-		String num = req.getParameter("num");
 		
 		BoardDAO dao = new BoardDAO();
 		

@@ -190,7 +190,7 @@
 							            <td>
 							            <!-- 다운로드 링크는 첨부파일이 있을때만 표시 -->
 							            <c:if test="${ not empty row.ofile }">
-							            	<a href="../board/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>	
+							            	<a href="#">[Down]</a>	
 							            </c:if>
 							            </td>
 							        </tr>

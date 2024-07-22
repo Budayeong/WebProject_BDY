@@ -5,6 +5,7 @@ import java.io.IOException;
 import common.FileUtil;
 import common.JSFunction;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,10 @@ import model.FBoardDAO;
 import model.FBoardDTO;
 
 @WebServlet("/board/fboardWrite.do")
+@MultipartConfig(
+		maxFileSize = 1024 * 1024* 100,
+		maxRequestSize =  1024 * 1024 *1000
+)
 public class FBoardWriteController extends HttpServlet {
 	
 	@Override
@@ -32,6 +37,10 @@ public class FBoardWriteController extends HttpServlet {
 //		업로드 디렉터리의 물리적 경로 확인
 		String saveDirectory = req.getServletContext().getRealPath("/uploads");
 		
+//		현재 로그인 한 유저의 아이디, 이름 가져옴
+		String UserId = (String) req.getSession().getAttribute("UserId");
+		String UserName = (String) req.getSession().getAttribute("UserName");
+		
 //		파일 업로드
 		String originalFileName = "";
 		try {
@@ -48,6 +57,8 @@ public class FBoardWriteController extends HttpServlet {
 		FBoardDTO dto = new FBoardDTO();
 		dto.setTitle(req.getParameter("title"));
 		dto.setContent(req.getParameter("content"));
+		dto.setId(UserId);
+		dto.setName(UserName);
 		
 //		오리지널 파일명이 빈값이 아니면 = 첨부파일 업로드가 정상적으로 완료됐으면
 		if(originalFileName != "") {

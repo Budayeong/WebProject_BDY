@@ -134,7 +134,7 @@ public class FBoardDAO extends DBConnPool {
 			String query = "INSERT INTO fboard ( "
 						+ " num, title, content, id, name, ofile, sfile) "
 						+ " VALUES ( "
-						+ " seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ? )";
+						+ " seq_fboard_num.NEXTVAL, ?, ?, ?, ?, ?, ? )";
 
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
@@ -153,9 +153,46 @@ public class FBoardDAO extends DBConnPool {
 		return result;
 	}
 	
+//	게시물 수정
+	public int updatePost(FBoardDTO dto) {
+		int result = 0;
+		try {
+//			수정을 위한 update 쿼리문 작성 (일련번호와 패스워드까지 조건문에 추가)
+			String query = "UPDATE fboard "
+						+ "SET title=?, content=?, ofile=?, sfile=? "
+						+ "WHERE num=?";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getOfile());
+			psmt.setString(4, dto.getSfile());
+			psmt.setString(5, dto.getNum());
+			
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
-	
-	
+//	일련번호에 해당하는 게시물을 삭제
+	public int deletePost(String num) {
+		int result = 0;
+		try {
+			String query = "DELETE FROM fboard WHERE num=?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
 	
@@ -174,6 +211,23 @@ public class FBoardDAO extends DBConnPool {
 			System.out.println("게시물 조회수 증가 중 예외발생");
 			e.printStackTrace();
 		}
+		
+	}
+	
+	
+	
+//	파일 다운로드 카운트 증가
+	public void downCountPlus(String num) {
+		String sql =  "UPDATE fboard SET"
+						+ " downcount = downcount + 1"
+						+ " WHERE num=?";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, num);
+			psmt.executeUpdate();
+		}
+		catch (Exception e) {}
 		
 	}
 	

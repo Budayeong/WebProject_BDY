@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자료실 글작성</title>
+  <title>자료실 상세보기</title>
    <script>
    function confirmDelete(url) {
 	   if (confirm("정말로 삭제하시겠습니까?")){
@@ -142,10 +142,9 @@
 		         <td>            
 <%-- 		         	${ dto.# } --%>
 		        	${ dto.ofile }
-		        	<a href="#">[다운로드]</a>
+		        	<a href="../board/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&num=${ dto.num }">[다운로드]</a>
 		         </td>
-<%-- 			     <td>다운로드 수</td> <td>${ dto.# }</td> --%>
-			     <td>다운로드 수</td> <td>${ dto.visitcount }</td>
+			     <td>다운로드 수</td> <td>${ dto.downcount }</td>
 			   </tr>
 			   <tr>
 			     <td>제목</td>
@@ -160,10 +159,10 @@
 				 <c:when test="${ (not empty UserId) && (UserId eq dto.id) }">
 				   <tr>
 			         <td colspan="4" align="center">
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/fboardEdit.do?num=${ dto.num }';">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/fboardEdit.do?num=${ dto.num }&id=${ dto.id }';">
 		                    수정하기
 		                </button>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/fboardDelete.do?num=${dto.num}')">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/fboardDelete.do?num=${dto.num}&id=${ dto.id }')">
 		                    삭제하기
 		                </button>
 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/fboard.do';">

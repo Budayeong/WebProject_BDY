@@ -13,7 +13,7 @@ function validateForm(form) {
     }
     if (form.content.value == "") {
         alert("내용을 입력하세요.");
-        form.content.focus();
+        form.title.focus();
         return false;
     }
     return true;
@@ -22,7 +22,7 @@ function validateForm(form) {
 </script>
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자유게시판 글수정</title>
+  <title>자료실 글수정</title>
 </head>
 <body>
   <div class="container-scroller">
@@ -123,8 +123,8 @@ function validateForm(form) {
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">자유게시판</h3>
-                  <h6 class="font-weight-normal mb-0">특정한 주제없이 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">자료실</h3>
+                  <h6 class="font-weight-normal mb-0">파일을 첨부해 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
                 </div>
               </div>
             </div>
@@ -136,19 +136,33 @@ function validateForm(form) {
               <div class="table-responsive">
               
               
-<form name="writeForm" method="post" action="../board/boardWrite.do" onsubmit="return validateForm(this);">
+<form name="editForm" method="post" enctype="multipart/form-data" action="../board/fboardWrite.do" onsubmit="return validateForm(this);">
+<!-- 글내용 수정을 위해 input hidden으로 게시글 번호 전달 -->
+<input type="hid-den"  name="num" value="${ dto.num }"/>
+<!-- 
+기존 등록된 파일명을 설정. 만약 수정페이지에서 첨부파일을 변경하지 않는다면
+여기에 등록된 파일명을 이용해 update 할 예정.
+ -->
+<input type="hid-den"  name="prevOfile" value="${ dto.ofile }"/>
+<input type="hid-den"  name="prevSfile" value="${ dto.sfile }"/>
 <table class="table" width="90%">
 <tr>
   <td>제목</td>
   <td>
-  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요"/>
+  	<input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${ dto.title }"/> 
+  </td>
+</tr>
+<tr>
+  <td>파일첨부</td>
+  <td>
+   <input type="file" name="ofile"/>
   </td>
 </tr>
 <!-- 게시물 내용 -->
 <tr>
   <td>내용</td>
   <td>
-  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;"></textarea>
+  	<textarea name="content" class="form-control form-control-lg" placeholder="내용을 입력하세요" style="height:400px;">${ dto.content }</textarea>
   </td>
 </tr>
 <tr>
@@ -159,7 +173,7 @@ function validateForm(form) {
      <button type="reset" class="btn btn-primary btn-sm" >
          다시하기
      </button>
-     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/board.do';">
+     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../board/fboard.do';">
            목록 바로가기
      </button>
    </td>

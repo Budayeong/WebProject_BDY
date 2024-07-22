@@ -27,7 +27,7 @@ function validateForm(form) {
 </script>
 <head>
   <%@ include file="../inc/board_head.jsp" %>
-  <title>자료실 글수정</title>
+  <title>자료실 글쓰기</title>
 </head>
 <body>
   <div class="container-scroller">
@@ -128,8 +128,8 @@ function validateForm(form) {
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">자유게시판</h3>
-                  <h6 class="font-weight-normal mb-0">특정한 주제없이 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">자료실</h3>
+                  <h6 class="font-weight-normal mb-0">파일을 첨부해 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
                 </div>
               </div>
             </div>

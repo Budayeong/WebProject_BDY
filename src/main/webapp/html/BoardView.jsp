@@ -151,11 +151,11 @@
 				   <tr>
 			         <td colspan="4" align="center">
 <%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/pass.do?mode=edit&idx=${ param.idx }';"> --%>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardEdit.do?num=${ dto.num }';">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardEdit.do?num=${ dto.num }&id=${ dto.id }';">
 		                    수정하기
 		                </button>
 <%-- 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/boardDelete.do?num=${ dto.num }';"> --%>
-		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/boardDelete.do?num=${dto.num}')">
+		                <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/boardDelete.do?num=${dto.num}&id=${ dto.id }')">
 		                    삭제하기
 		                </button>
 		                <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/board.do';">
