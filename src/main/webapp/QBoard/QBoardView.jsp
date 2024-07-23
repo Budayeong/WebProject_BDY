@@ -210,6 +210,11 @@
    <tr>
        <td>
        <span style="font-weight: bold;">${ row.name }</span>
+       <c:if test="${ (not empty UserId) && (UserId eq row.id) }">
+       <button type="button" class="btn btn-primary btn-sm"  onclick="location.href='../board/commentEdit.do?num=${ row.num }&bnum=${ dto.num }';">수정</button>
+       <button type="button" class="btn btn-primary btn-sm"  onclick="confirmDelete('../board/commentDelete.do?num=${ row.num }&bnum=${ dto.num }')">삭제</button>
+       </c:if>
+       
        <span style='float:right;' align='right'>${ row.regdate }</span>
        </td>
    </tr>
@@ -219,7 +224,6 @@
 </table>
 <br/>
 </c:forEach>
--
 
 
 
@@ -237,7 +241,7 @@
          	<textarea name="content" id="content" class="form-control" required placeholder="댓글을 작성하세요." style="height:50px;"></textarea>
          	<br />
          	<input type="submit" value="댓글쓰기" class="btn btn-primary btn-sm" />
-         	<input type="hid-den" name="bnum" value="${ dto.num }" />
+         	<input type="hidden" name="bnum" value="${ dto.num }" />
     	 </td>
 	   </tr>
 	</table>
