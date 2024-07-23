@@ -1,7 +1,7 @@
 package qboardCtrl;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import common.CookieManager;
 import jakarta.servlet.ServletException;
@@ -9,6 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.CommentDAO;
+import model.CommentDTO;
 import model.QBoardDAO;
 import model.QBoardDTO;
 
@@ -54,6 +56,12 @@ public class QBoardViewController extends HttpServlet {
 			if(ext.equals("mp3"))
 				fileType ="sound";
 		}
+		
+//		댓글처리
+		CommentDAO cdao = new CommentDAO();
+		ArrayList<CommentDTO> commentList = cdao.listComment(num);
+
+		req.setAttribute("commentList", commentList);
 		
 		
 		req.setAttribute("fileType", fileType);

@@ -104,7 +104,7 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">QnA 게시판</h3>
-                  <h6 class="font-weight-normal mb-0">질문과 답변을 하는 공간입니다<span class="text-primary">3 unread alerts!</span></h6>
+                  <h6 class="font-weight-normal mb-0">질문과 답변을 하는 공간입니다
                 </div>
               </div>
             </div>
@@ -202,6 +202,59 @@
 			     </c:otherwise>
 			   </c:choose>
 			 </table>
+
+
+<!-- 댓글 목록 -->
+<c:forEach items="${ commentList }" var="row" varStatus="loop">
+<table id="comment" class="table table-bordered">
+   <tr>
+       <td>
+       <span style="font-weight: bold;">${ row.name }</span>
+       <span style='float:right;' align='right'>${ row.regdate }</span>
+       </td>
+   </tr>
+   <tr>
+       <td>${ row.content }</td>
+   </tr>
+</table>
+<br/>
+</c:forEach>
+-
+
+
+
+
+<!-- 댓글 작성--> 
+<c:if test="${ not empty UserId }">
+<form method="POST" action="../board/commentAdd.do">
+	<table id="tblAddComment" class="table table-bordered">
+	   <tr>
+	     <td>${ UserName }</td>
+	   </tr>
+	   <tr>
+	     <td colspan="4" height="100">
+<!-- 		         	<input type="text" name="content" id="content" class="form-control" required placeholder="댓글을 작성하세요. " height="100"/> -->
+         	<textarea name="content" id="content" class="form-control" required placeholder="댓글을 작성하세요." style="height:50px;"></textarea>
+         	<br />
+         	<input type="submit" value="댓글쓰기" class="btn btn-primary btn-sm" />
+         	<input type="hid-den" name="bnum" value="${ dto.num }" />
+    	 </td>
+	   </tr>
+	</table>
+</form>			
+</c:if>		 
+			  
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
             </div>
           </div>
          </div>

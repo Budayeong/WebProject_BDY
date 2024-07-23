@@ -31,9 +31,7 @@ function validateForm(form) {
 </head>
 <body>
   <div class="container-scroller">
-    <!-- 네비 바 start -->
     <%@ include file="../inc/navbar.jsp" %> 
-	<!-- 유저메뉴 start -->
 	<c:if test="${ not empty UserId }">
 	          <li class="nav-item nav-profile dropdown">
 	            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
@@ -66,14 +64,10 @@ function validateForm(form) {
 	          </li>
 	        </ul>
 	</c:if>
-	<!-- 유저메뉴 end -->
         </ul>
       </div>
     </nav>
-    <!-- 네비 바 end -->
-    <!-- 페이지 내용 start  -->
     <div class="container-fluid page-body-wrapper">
-      <!-- 왼쪽 사이드 바 -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -96,7 +90,6 @@ function validateForm(form) {
               </ul>
             </div>
           </li>
-          <!-- 유저페이지 start -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="icon-head menu-icon"></i>
@@ -117,11 +110,8 @@ function validateForm(form) {
               </ul>
             </div>
           </li>
-          <!-- 유저페이지 end -->
         </ul>
       </nav>
-      <!-- 왼쪽 사이드 바 end -->
-      <!-- 게시판 start -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -129,12 +119,11 @@ function validateForm(form) {
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">자료실</h3>
-                  <h6 class="font-weight-normal mb-0">파일을 첨부해 자유롭게 글을 작성해보세요 <span class="text-primary">3 unread alerts!</span></h6>
+                  <h6 class="font-weight-normal mb-0">파일을 첨부해 자유롭게 글을 작성해보세요 
                 </div>
               </div>
             </div>
           </div>
-          <!-- 테이블  -->
         <div class="col-md-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
@@ -155,7 +144,6 @@ function validateForm(form) {
   	<input type="file" name="ofile" />
   </td>
 </tr>
-<!-- 게시물 내용 -->
 <tr>
   <td>내용</td>
   <td>
@@ -183,15 +171,10 @@ function validateForm(form) {
           </div>
          </div>
        </div>
-        <!-- 테이블 end -->
-        <!-- 푸터 start  -->
         <%@ include file="../inc/footer.jsp" %> 
-        <!-- 푸터 end -->
         </div>
       </div>   
-      <!-- 게시판 end -->
   	</div>
-  	<!-- 페이지 내용 end  -->
 
   <!-- plugins:js -->
   <%@ include file="../inc/js.jsp" %>

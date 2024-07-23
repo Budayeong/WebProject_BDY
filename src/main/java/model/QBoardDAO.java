@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -34,8 +35,6 @@ public class QBoardDAO extends DBConnPool {
 		}
 		return totalCount;
 	}
-	
-	
 
 //	게시물 목록 반환
 	public List<QBoardDTO> selectListPage(Map<String, Object> map) {
@@ -194,8 +193,6 @@ public class QBoardDAO extends DBConnPool {
 		return result;
 	}
 	
-	
-	
 //	게시물 조회수 증가하기
 	public void updateVisitCount(String num) {
 		String query =  "UPDATE qboard SET"
@@ -215,8 +212,6 @@ public class QBoardDAO extends DBConnPool {
 		
 	}
 	
-	
-	
 //	파일 다운로드 카운트 증가
 	public void downCountPlus(String num) {
 		String sql =  "UPDATE qboard SET"
@@ -231,5 +226,8 @@ public class QBoardDAO extends DBConnPool {
 		catch (Exception e) {}
 		
 	}
+	
+
+	
 	
 }

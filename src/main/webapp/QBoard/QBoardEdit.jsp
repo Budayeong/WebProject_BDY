@@ -114,7 +114,7 @@ function validateForm(form) {
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">QnA 게시판</h3>
-                  <h6 class="font-weight-normal mb-0">질문과 답변을 하는 공간입니다<span class="text-primary">3 unread alerts!</span></h6>
+                  <h6 class="font-weight-normal mb-0">질문과 답변을 하는 공간입니다
                 </div>
               </div>
             </div>
