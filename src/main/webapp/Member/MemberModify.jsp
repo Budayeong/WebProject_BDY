@@ -124,11 +124,7 @@ function errFunc(errData) {
               <h3>회원정보 수정</h3>
               <form class="pt-3" method="post" onsubmit="return validate(this);" action="${pageContext.request.contextPath}/member/modify.do">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="member_id" placeholder="아이디 (영문소문자/숫자, 6~12자)" value="${ UserId }"></br>
-                  <button type="button" name="idCheck" id="idCheck">중복 확인</button>
-                  <span id="checkResult"></span><br> 
-<!--                   아이디 중복 확인 여부를 위한 hidden input태그 -->
-                  <input type="hidden" name="checkId" value="unCheck" />
+                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="member_id" placeholder="아이디 (영문소문자/숫자, 6~12자)" value="${ UserId }" readonly>
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="member_pass" placeholder="비밀번호" value="${ UserPass }">

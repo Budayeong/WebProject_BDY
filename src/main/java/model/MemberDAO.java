@@ -101,15 +101,14 @@ public class MemberDAO extends DBConnPool {
 		int result = 0;
 		try{
 			
-			String query = "UPDATE pmember SET id = ?, pass = ?, name = ?, email = ?, tel =? WHERE id = ? ";
+			String query = "UPDATE pmember SET pass = ?, name = ?, email = ?, tel =? WHERE id = ? ";
 			
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getId());
-			psmt.setString(2, dto.getPass());
-			psmt.setString(3, dto.getName());
-			psmt.setString(4, dto.getEmail());
-			psmt.setString(5, dto.getTel());
-			psmt.setString(6, id);
+			psmt.setString(1, dto.getPass());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getEmail());
+			psmt.setString(4, dto.getTel());
+			psmt.setString(5, id);
 			result = psmt.executeUpdate();
 			
 		}
